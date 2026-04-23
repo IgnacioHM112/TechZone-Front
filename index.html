@@ -1,82 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>TechZone</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<title>TechZone</title>
+
+<link rel="stylesheet" href="styles.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
 </head>
 
 <body>
 
-<header class="header">
-    <div class="logo">TZ TechZone</div>
 
-    <nav>
-        <a href="#">Inicio</a>
-        <a href="#">Componentes</a>
-        <a href="#">PCs a medida</a>
-    </nav>
+<div class="topbar">
+⚡ Envío gratis en compras mayores a $100.000
+</div>
 
-    <input type="text" placeholder="Buscar productos..." class="buscador">
+
+<header class="navbar">
+
+<div class="logo">
+<div class="logo-box">TZ</div>
+<span>TechZone</span>
+</div>
+
+<nav>
+<a class="active" onclick="mostrarSeccion('inicio')">Inicio</a>
+<a onclick="mostrarSeccion('componentes')">Componentes</a>
+<a onclick="mostrarSeccion('pcs')">PCs a medida</a>
+</nav>
+
+<div class="nav-right">
+
+<input type="text" placeholder="Buscar productos..." onkeyup="buscarProducto(this.value)">
+
+<i class="ri-sun-line theme-btn" onclick="toggleTheme()" id="themeIcon"></i>
+<i class="ri-user-line"></i>
+
+<div class="cart" onclick="toggleCart()">
+<i class="ri-shopping-cart-line"></i>
+<span id="cart-count">0</span>
+</div>
+
+</div>
+
 </header>
 
-<section class="hero">
-    <div class="lado azul">
-        <h1>Armá tu PC,<br>parte por parte</h1>
-        <p>Procesadores, GPUs, RAM, almacenamiento y más</p>
-        <button>Explorar componentes →</button>
-    </div>
 
-    <div class="lado verde">
-        <h1>Tu PC ideal,<br>ya armada</h1>
-        <p>Configuraciones listas para gaming, trabajo y diseño</p>
-        <button>Ver configuraciones →</button>
-    </div>
+<section id="inicio" class="hero">
+
+<div class="hero-left">
+<h1>Armá tu PC,<br>parte por parte</h1>
+<p>Procesadores, GPUs, RAM y más</p>
+<button onclick="mostrarSeccion('componentes')">Explorar →</button>
+</div>
+
+<div class="hero-right">
+<h1>Tu PC ideal,<br>ya armada</h1>
+<p>Listas para gaming y trabajo</p>
+<button onclick="mostrarSeccion('pcs')">Ver PCs →</button>
+</div>
+
+<div class="circle">TZ</div>
+
 </section>
 
-<section class="beneficios">
-    <div class="card">
-        <h3>🚚 Envío Gratis</h3>
-        <p>En compras superiores a $100.000</p>
-    </div>
 
-    <div class="card">
-        <h3>🔒 Compra Segura</h3>
-        <p>Garantía oficial en todos los productos</p>
-    </div>
+<section id="componentes" class="grid hidden">
 
-    <div class="card">
-        <h3>💬 Asesoría Experta</h3>
-        <p>Te ayudamos a elegir los mejores componentes</p>
-    </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7">
+<h3>Ryzen 5</h3>
+<p>$120000</p>
+<button onclick="addToCart('Ryzen 5',120000)">Agregar</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1591488320449-011701bb6704">
+<h3>RTX 3060</h3>
+<p>$300000</p>
+<button onclick="addToCart('RTX 3060',300000)">Agregar</button>
+</div>
+
 </section>
 
-<footer class="footer">
-    <div>
-        <h2>TechZone</h2>
-        <p>Tu tienda de confianza para componentes de PC y tecnología</p>
-    </div>
+<section id="pcs" class="grid hidden">
 
-    <div>
-        <h3>Enlaces</h3>
-        <p>Componentes</p>
-        <p>PCs a medida</p>
-        <p>Ofertas</p>
-    </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1593642532400-2682810df593">
+<h3>PC Gamer</h3>
+<p>$500000</p>
+<button onclick="addToCart('PC Gamer',500000)">Agregar</button>
+</div>
 
-    <div>
-        <h3>Categorías</h3>
-        <p>Procesadores</p>
-        <p>Placas de Video</p>
-        <p>Memorias RAM</p>
-    </div>
+</section>
 
-    <div>
-        <h3>Contacto</h3>
-        <p>info@techzone.com.ar</p>
-        <p>Mendoza, Argentina</p>
-    </div>
-</footer>
+
+<div class="cart-panel" id="cartPanel">
+<h2>Carrito</h2>
+<ul id="cart-items"></ul>
+<p id="total"></p>
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
