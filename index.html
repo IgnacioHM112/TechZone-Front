@@ -1,108 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>TechZone</title>
-
-<link rel="stylesheet" href="styles.css">
-<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-
-<div class="topbar">
-⚡ Envío gratis en compras mayores a $100.000
-</div>
-
-
-<header class="navbar">
-
-<div class="logo">
-<div class="logo-box">TZ</div>
-<span>TechZone</span>
-</div>
-
-<nav>
-<a class="active" onclick="mostrarSeccion('inicio')">Inicio</a>
-<a onclick="mostrarSeccion('componentes')">Componentes</a>
-<a onclick="mostrarSeccion('pcs')">PCs a medida</a>
-</nav>
-
-<div class="nav-right">
-
-<input type="text" placeholder="Buscar productos..." onkeyup="buscarProducto(this.value)">
-
-<i class="ri-sun-line theme-btn" onclick="toggleTheme()" id="themeIcon"></i>
-<i class="ri-user-line"></i>
-
-<div class="cart" onclick="toggleCart()">
-<i class="ri-shopping-cart-line"></i>
-<span id="cart-count">0</span>
-</div>
-
-</div>
-
-</header>
-
-
-<section id="inicio" class="hero">
-
-<div class="hero-left">
-<h1>Armá tu PC,<br>parte por parte</h1>
-<p>Procesadores, GPUs, RAM y más</p>
-<button onclick="mostrarSeccion('componentes')">Explorar →</button>
-</div>
-
-<div class="hero-right">
-<h1>Tu PC ideal,<br>ya armada</h1>
-<p>Listas para gaming y trabajo</p>
-<button onclick="mostrarSeccion('pcs')">Ver PCs →</button>
-</div>
-
-<div class="circle">TZ</div>
-
-</section>
-
-
-<section id="componentes" class="grid hidden">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7">
-<h3>Ryzen 5</h3>
-<p>$120000</p>
-<button onclick="addToCart('Ryzen 5',120000)">Agregar</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1591488320449-011701bb6704">
-<h3>RTX 3060</h3>
-<p>$300000</p>
-<button onclick="addToCart('RTX 3060',300000)">Agregar</button>
-</div>
-
-</section>
-
-<section id="pcs" class="grid hidden">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1593642532400-2682810df593">
-<h3>PC Gamer</h3>
-<p>$500000</p>
-<button onclick="addToCart('PC Gamer',500000)">Agregar</button>
-</div>
-
-</section>
-
-
-<div class="cart-panel" id="cartPanel">
-<h2>Carrito</h2>
-<ul id="cart-items"></ul>
-<p id="total"></p>
-</div>
-
-<script src="script.js"></script>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechZone - Ecommerce de Hardware</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
