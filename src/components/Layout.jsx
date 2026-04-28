@@ -9,7 +9,7 @@ const Layout = ({ children, title = 'Panel de Control' }) => {
     <div className="min-h-screen bg-slate-900 text-white flex">
       <Sidebar />
 
-      <main className="flex-1 flex flex-col">
+      <main className="flex-1 flex flex-col relative">
         {/* Header */}
         <header className="h-20 bg-slate-800/50 backdrop-blur-md border-b border-slate-700 px-8 flex items-center justify-between sticky top-0 z-10">
           <div>

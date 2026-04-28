@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { Toaster } from 'react-hot-toast';
@@ -13,8 +13,19 @@ import ProductsCatalog from './pages/ProductsCatalog';
 import CartPage from './pages/CartPage';
 import PaymentSuccess from './pages/PaymentSuccess';
 import ProtectedRoute from './components/ProtectedRoute';
+import ChatBot from './components/ChatBot';
 import { Loader2 } from 'lucide-react';
 import './index.css';
+
+// Componente para mostrar el ChatBot excepto en rutas de admin
+const ChatBotWrapper = () => {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
+  
+  if (isAdminRoute) return null;
+  
+  return <ChatBot />;
+};
 
 // Componente para redirigir si el usuario ya está logueado
 const PublicRoute = ({ children }) => {
@@ -128,6 +139,7 @@ function App() {
             }}
           />
           <AppRoutes />
+          <ChatBotWrapper />
         </Router>
       </CartProvider>
     </AuthProvider>
