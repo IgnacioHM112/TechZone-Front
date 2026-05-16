@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Cpu, Monitor, Zap, ChevronRight, Github } from 'lucide-react';
+import { ShoppingCart, Cpu, Monitor, Zap, ChevronRight, Github, Mail } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const LandingPage = () => {
@@ -21,6 +21,7 @@ const LandingPage = () => {
             <div className="hidden md:flex gap-8 text-sm font-medium text-slate-400">
               <a href="#features" className="hover:text-white transition-colors">Características</a>
               <a href="#about" className="hover:text-white transition-colors">Nosotros</a>
+              <a href="#contact" className="hover:text-white transition-colors">Contacto</a>
             </div>
             {user ? (
               <Link 
@@ -111,19 +112,45 @@ const LandingPage = () => {
         </div>
       </section>
 
+      {/* Contact Section */}
+      <section id="contact" className="py-32 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-8">¿Tienes alguna duda?</h2>
+          <p className="text-slate-400 text-lg mb-12">
+            Nuestro equipo de soporte está listo para ayudarte con tus consultas técnicas o sobre tus pedidos.
+          </p>
+          <div className="inline-flex items-center gap-4 bg-slate-800/50 border border-slate-700 p-8 rounded-[2rem] hover:border-blue-500/50 transition-all group">
+            <div className="w-16 h-16 bg-blue-500/10 text-blue-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Mail size={32} />
+            </div>
+            <div className="text-left">
+              <p className="text-sm font-bold text-slate-500 uppercase tracking-widest mb-1">Escríbenos a</p>
+              <a href="mailto:Techzone.mza26@gmail.com" className="text-2xl font-bold hover:text-blue-400 transition-colors">
+                Techzone.mza26@gmail.com
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer Minimalista */}
       <footer className="py-20 border-t border-slate-800 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:row justify-between items-center gap-8">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-slate-800 rounded-lg flex items-center justify-center border border-slate-700">
               <span className="font-bold">T</span>
             </div>
             <span className="text-xl font-bold tracking-tight">TechZone</span>
           </div>
-          <div className="flex gap-8 text-slate-500 text-sm">
-            <span>© 2026 TechZone Inc.</span>
-            <a href="#" className="hover:text-white transition-colors">Privacidad</a>
-            <a href="#" className="hover:text-white transition-colors">Términos</a>
+          <div className="flex flex-col items-center gap-2">
+            <div className="flex gap-8 text-slate-500 text-sm">
+              <span>© 2026 TechZone Inc.</span>
+              <a href="#" className="hover:text-white transition-colors">Privacidad</a>
+              <a href="#" className="hover:text-white transition-colors">Términos</a>
+            </div>
+            <a href="mailto:Techzone.mza26@gmail.com" className="text-xs text-slate-600 hover:text-blue-400 transition-colors">
+              Techzone.mza26@gmail.com
+            </a>
           </div>
           <div className="flex gap-4">
             <a href="#" className="p-2 text-slate-400 hover:text-white transition-colors">
