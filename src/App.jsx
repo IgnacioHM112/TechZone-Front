@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import AdminHome from './pages/admin/AdminHome';
 import AdminProducts from './pages/admin/AdminProducts';
 import AdminCategories from './pages/admin/AdminCategories';
+import AISupportConfig from './pages/admin/AISupportConfig';
 import ProductsCatalog from './pages/ProductsCatalog';
 import CartPage from './pages/CartPage';
 import PaymentSuccess from './pages/PaymentSuccess';
@@ -112,6 +113,14 @@ function AppRoutes() {
         element={
           <ProtectedRoute requireAdmin={true}>
             <AdminCategories />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/ai-support"
+        element={
+          <ProtectedRoute requireAdmin={true}>
+            <AISupportConfig />
           </ProtectedRoute>
         }
       />

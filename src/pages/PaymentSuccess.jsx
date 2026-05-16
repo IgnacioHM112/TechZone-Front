@@ -64,11 +64,14 @@ const PaymentSuccess = () => {
   }, [searchParams]);
 
   const handleDownload = async () => {
-    if (!order) return;
+    // Usar order.id si está disponible, sino el order_id de la URL
+    const finalId = order?.id || order_id;
+    if (!finalId) return;
+    
     setIsDownloading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await api.get(`/orders/${order.id}/download`, {
+      const response = await api.get(`/orders/${finalId}/download`, {
         headers: { Authorization: `Bearer ${token}` },
         responseType: 'blob'
       });
@@ -76,13 +79,14 @@ const PaymentSuccess = () => {
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', `comprobante_techzone_${order.id}.pdf`);
+      link.setAttribute('download', `comprobante_techzone_${finalId}.pdf`);
       document.body.appendChild(link);
       link.click();
       link.parentNode.removeChild(link);
       window.URL.revokeObjectURL(url);
       toast.success('Factura descargada con éxito');
     } catch (err) {
+      console.error('Error al descargar PDF:', err);
       toast.error('Error al generar la descarga del PDF');
     } finally {
       setIsDownloading(false);
@@ -126,17 +130,34 @@ const PaymentSuccess = () => {
             <CheckCircle2 size={80} className="text-green-500 mx-auto mb-8 drop-shadow-[0_0_15px_rgba(34,197,94,0.3)]" />
             <h1 className="text-4xl font-black mb-4 tracking-tighter text-white">¡Gracias por confiar!</h1>
             <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-              La orden <span className="text-blue-400 font-bold">#{order?.id}</span> ha sido procesada el {new Date(order?.created_at).toLocaleDateString()}.
+              La orden <span className="text-blue-400 font-bold">#{order?.id || order_id}</span> ha sido procesada el {
+                (order?.createdAt || order?.created_at || order?.date) 
+                ? new Date(order?.createdAt || order?.created_at || order?.date).toLocaleDateString() 
+                : new Date().toLocaleDateString()
+              }.
             </p>
 
             <div className="bg-slate-900/50 border border-slate-700/50 rounded-2xl p-6 mb-10 text-left">
-                <div className="flex justify-between items-center mb-4">
+                <div className="flex justify-between items-center mb-4 border-b border-slate-700/50 pb-4">
                     <span className="text-xs font-bold text-slate-500 uppercase">Resumen de inversión</span>
                     <span className="text-[10px] bg-green-500/10 text-green-500 px-2 py-1 rounded-lg font-black uppercase">Pagado</span>
                 </div>
-                <div className="flex justify-between items-end">
+                
+                {/* Lista de productos comprados */}
+                <div className="space-y-3 mb-6">
+                  {(order?.OrderItems || order?.items || order?.CartItems || []).map((item, idx) => (
+                    <div key={idx} className="flex justify-between items-center text-sm">
+                      <span className="text-slate-400">
+                        <span className="font-bold text-slate-200">{item.quantity}x</span> {item.Product?.name || item.product?.name || 'Producto'}
+                      </span>
+                      <span className="text-slate-300">${((item.price || item.product?.price || 0) * item.quantity).toLocaleString()}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex justify-between items-end pt-4 border-t border-slate-700/50">
                     <span className="text-slate-300">Total Final</span>
-                    <span className="text-3xl font-black text-white">${order?.total_amount?.toLocaleString()}</span>
+                    <span className="text-3xl font-black text-white">${(order?.total_amount || order?.total || 0).toLocaleString()}</span>
                 </div>
             </div>
 

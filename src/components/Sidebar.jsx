@@ -7,6 +7,7 @@ import {
   Settings, 
   Package, 
   Tags,
+  Bot,
   ChevronRight
 } from 'lucide-react';
 
@@ -23,6 +24,7 @@ const Sidebar = () => {
   const menuItems = isAdmin ? [
     { name: 'Productos', icon: <Package size={20} />, path: '/admin/products' },
     { name: 'Categorías', icon: <Tags size={20} />, path: '/admin/categories' },
+    { name: 'Soporte IA', icon: <Bot size={20} />, path: '/admin/ai-support' },
   ] : [
     { name: 'Dashboard', icon: <LayoutDashboard size={20} />, path: '/home' },
     { name: 'Productos', icon: <ShoppingBag size={20} />, path: '/products' },

@@ -28,6 +28,7 @@ const SimpleNavbar = () => {
 
         {/* Acciones */}
         <div className="flex items-center gap-6">
+          <a href="/#contact" className="hidden md:block text-slate-400 hover:text-white text-sm font-bold transition-colors">Contacto</a>
           {/* Carrito */}
           <Link 
             to="/cart" 
