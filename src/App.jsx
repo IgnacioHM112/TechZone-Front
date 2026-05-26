@@ -9,12 +9,12 @@ import Home from './pages/Home';
 import AdminHome from './pages/admin/AdminHome';
 import AdminProducts from './pages/admin/AdminProducts';
 import AdminCategories from './pages/admin/AdminCategories';
-import AISupportConfig from './pages/admin/AISupportConfig';
 import ProductsCatalog from './pages/ProductsCatalog';
 import CartPage from './pages/CartPage';
 import PaymentSuccess from './pages/PaymentSuccess';
 import ProtectedRoute from './components/ProtectedRoute';
 import ChatBot from './components/ChatBot';
+import Mascot from './components/Mascot';
 import { Loader2 } from 'lucide-react';
 import './index.css';
 
@@ -34,8 +34,8 @@ const PublicRoute = ({ children }) => {
   
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <Loader2 className="w-12 h-12 text-blue-600 animate-spin" />
       </div>
     );
   }
@@ -49,15 +49,8 @@ const PublicRoute = ({ children }) => {
 function AppRoutes() {
   return (
     <Routes>
-      {/* Landing Page protegida para no-logueados */}
-      <Route 
-        path="/" 
-        element={
-          <PublicRoute>
-            <LandingPage />
-          </PublicRoute>
-        } 
-      />
+      {/* Landing Page accesible para todos */}
+      <Route path="/" element={<LandingPage />} />
       
       {/* Catálogo Público */}
       <Route path="/products" element={<ProductsCatalog />} />
@@ -96,11 +89,12 @@ function AppRoutes() {
         element={<Navigate to="/products" replace />}
       />
 
-      {/* Rutas de Admin */}
       <Route
         path="/admin/home"
         element={<Navigate to="/admin/products" replace />}
-      />      <Route
+      />
+
+      <Route
         path="/admin/products"
         element={
           <ProtectedRoute requireAdmin={true}>
@@ -113,14 +107,6 @@ function AppRoutes() {
         element={
           <ProtectedRoute requireAdmin={true}>
             <AdminCategories />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/admin/ai-support"
-        element={
-          <ProtectedRoute requireAdmin={true}>
-            <AISupportConfig />
           </ProtectedRoute>
         }
       />
@@ -149,6 +135,7 @@ function App() {
           />
           <AppRoutes />
           <ChatBotWrapper />
+          <Mascot />
         </Router>
       </CartProvider>
     </AuthProvider>

@@ -13,44 +13,44 @@ const ConfirmationModal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-slate-800 border border-slate-700 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="bg-white border border-slate-200 w-full max-w-md rounded-[2.5rem] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
         
         {/* Header con icono decorativo */}
-        <div className="p-6 pb-0 flex justify-between items-start">
-          <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${
-            variant === 'danger' ? 'bg-red-500/10 text-red-500' : 'bg-blue-500/10 text-blue-500'
+        <div className="p-8 pb-0 flex justify-between items-start">
+          <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${
+            variant === 'danger' ? 'bg-red-50 text-red-500' : 'bg-blue-50 text-blue-600'
           }`}>
-            <AlertTriangle size={24} />
+            <AlertTriangle size={28} />
           </div>
           <button 
             onClick={onClose}
-            className="text-slate-500 hover:text-white transition-colors p-2 hover:bg-slate-700 rounded-lg"
+            className="text-slate-400 hover:text-slate-900 transition-colors p-2 hover:bg-slate-50 rounded-xl"
           >
-            <X size={20} />
+            <X size={24} />
           </button>
         </div>
 
         {/* Contenido */}
-        <div className="p-6">
-          <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
-          <p className="text-slate-400 leading-relaxed">{message}</p>
+        <div className="p-8">
+          <h3 className="text-2xl font-black text-slate-900 mb-3 tracking-tight">{title}</h3>
+          <p className="text-slate-500 font-medium leading-relaxed">{message}</p>
         </div>
 
         {/* Acciones */}
-        <div className="p-6 bg-slate-800/50 flex gap-3">
+        <div className="p-8 bg-slate-50/50 flex gap-4">
           <button
             onClick={onClose}
-            className="flex-1 px-6 py-3 border border-slate-700 rounded-xl text-slate-300 hover:bg-slate-700 transition-all font-semibold"
+            className="flex-1 px-6 py-4 border border-slate-200 rounded-2xl text-slate-600 hover:bg-white hover:border-slate-300 transition-all font-bold"
           >
             {cancelText}
           </button>
           <button
             onClick={onConfirm}
-            className={`flex-1 px-6 py-3 rounded-xl font-bold shadow-lg transition-all transform active:scale-95 ${
+            className={`flex-1 px-6 py-4 rounded-2xl font-black uppercase tracking-widest text-sm shadow-xl transition-all transform active:scale-95 ${
               variant === 'danger' 
-                ? 'bg-red-600 hover:bg-red-700 text-white shadow-red-500/20' 
-                : 'bg-blue-600 hover:bg-blue-700 text-white shadow-blue-500/20'
+                ? 'bg-red-500 hover:bg-red-600 text-white shadow-red-500/20' 
+                : 'bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/20'
             }`}
           >
             {confirmText}
@@ -60,5 +60,6 @@ const ConfirmationModal = ({
     </div>
   );
 };
+
 
 export default ConfirmationModal;

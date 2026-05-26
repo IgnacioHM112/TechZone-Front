@@ -95,22 +95,22 @@ const PaymentSuccess = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center gap-6">
-        <Loader2 className="w-16 h-16 text-blue-500 animate-spin" />
-        <h2 className="text-2xl font-bold text-white tracking-tight">Validando Transacción...</h2>
+      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center gap-6">
+        <Loader2 className="w-16 h-16 text-blue-600 animate-spin" />
+        <h2 className="text-2xl font-black text-slate-800 tracking-tight">Validando Transacción...</h2>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-slate-900 text-white pt-24 flex items-center justify-center px-6">
+      <div className="min-h-screen bg-slate-50 text-slate-900 pt-24 flex items-center justify-center px-6">
         <SimpleNavbar />
-        <div className="max-w-md w-full bg-slate-800 border border-slate-700 rounded-[2.5rem] p-10 text-center shadow-2xl">
-          {error.type === 'security' ? <ShieldAlert size={64} className="text-amber-500 mx-auto mb-6" /> : <AlertCircle size={64} className="text-red-500 mx-auto mb-6" />}
-          <h1 className="text-2xl font-bold mb-4">{error.type === 'security' ? 'Acceso Restringido' : 'Error en Sincronización'}</h1>
-          <p className="text-slate-400 mb-8">{error.mensaje}</p>
-          <Link to="/products" className="block w-full bg-white text-slate-900 font-bold py-4 rounded-2xl hover:bg-blue-500 hover:text-white transition-all">
+        <div className="max-w-md w-full bg-white border border-slate-200 rounded-[3rem] p-12 text-center shadow-2xl shadow-slate-200/50">
+          {error.type === 'security' ? <ShieldAlert size={72} className="text-amber-500 mx-auto mb-8" /> : <AlertCircle size={72} className="text-red-500 mx-auto mb-8" />}
+          <h1 className="text-3xl font-black mb-4 tracking-tight text-slate-900">{error.type === 'security' ? 'Acceso Restringido' : 'Error en Sincronización'}</h1>
+          <p className="text-slate-500 mb-10 font-medium leading-relaxed">{error.mensaje}</p>
+          <Link to="/products" className="btn-brand block w-full py-4 text-lg">
             Ir a la Tienda
           </Link>
         </div>
@@ -119,58 +119,60 @@ const PaymentSuccess = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white pt-24 pb-20">
+    <div className="min-h-screen bg-slate-50 text-slate-900 pt-24 pb-20">
       <SimpleNavbar />
       <div className="max-w-2xl mx-auto px-6 text-center">
-        <div className="bg-slate-800 border border-slate-700 rounded-[3rem] p-10 shadow-2xl relative overflow-hidden">
+        <div className="bg-white border border-slate-200 rounded-[3rem] p-12 shadow-2xl shadow-slate-200/60 relative overflow-hidden">
           {/* Efectos visuales */}
-          <div className="absolute -top-24 -right-24 w-48 h-48 bg-green-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-50 rounded-full blur-3xl opacity-50"></div>
           
           <div className="relative z-10">
-            <CheckCircle2 size={80} className="text-green-500 mx-auto mb-8 drop-shadow-[0_0_15px_rgba(34,197,94,0.3)]" />
-            <h1 className="text-4xl font-black mb-4 tracking-tighter text-white">¡Gracias por confiar!</h1>
-            <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-              La orden <span className="text-blue-400 font-bold">#{order?.id || order_id}</span> ha sido procesada el {
+            <div className="w-24 h-24 bg-emerald-50 text-emerald-500 rounded-3xl flex items-center justify-center mx-auto mb-10 shadow-sm border border-emerald-100">
+              <CheckCircle2 size={56} className="drop-shadow-sm" />
+            </div>
+            <h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter text-slate-900">¡Gracias por tu compra!</h1>
+            <p className="text-slate-500 text-lg mb-10 leading-relaxed font-medium">
+              La orden <span className="text-blue-600 font-black">#{order?.id || order_id}</span> ha sido procesada con éxito el {
                 (order?.createdAt || order?.created_at || order?.date) 
                 ? new Date(order?.createdAt || order?.created_at || order?.date).toLocaleDateString() 
                 : new Date().toLocaleDateString()
               }.
             </p>
 
-            <div className="bg-slate-900/50 border border-slate-700/50 rounded-2xl p-6 mb-10 text-left">
-                <div className="flex justify-between items-center mb-4 border-b border-slate-700/50 pb-4">
-                    <span className="text-xs font-bold text-slate-500 uppercase">Resumen de inversión</span>
-                    <span className="text-[10px] bg-green-500/10 text-green-500 px-2 py-1 rounded-lg font-black uppercase">Pagado</span>
+            <div className="bg-slate-50 border border-slate-100 rounded-3xl p-8 mb-12 text-left shadow-inner">
+                <div className="flex justify-between items-center mb-6 border-b border-slate-200 pb-5">
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Resumen de inversión</span>
+                    <span className="text-[10px] bg-emerald-500 text-white px-3 py-1.5 rounded-full font-black uppercase tracking-wider shadow-sm shadow-emerald-500/20">Pagado</span>
                 </div>
                 
                 {/* Lista de productos comprados */}
-                <div className="space-y-3 mb-6">
+                <div className="space-y-4 mb-8">
                   {(order?.OrderItems || order?.items || order?.CartItems || []).map((item, idx) => (
-                    <div key={idx} className="flex justify-between items-center text-sm">
-                      <span className="text-slate-400">
-                        <span className="font-bold text-slate-200">{item.quantity}x</span> {item.Product?.name || item.product?.name || 'Producto'}
+                    <div key={idx} className="flex justify-between items-center">
+                      <span className="text-slate-600 font-medium">
+                        <span className="font-black text-slate-900">{item.quantity}x</span> {item.Product?.name || item.product?.name || 'Producto'}
                       </span>
-                      <span className="text-slate-300">${((item.price || item.product?.price || 0) * item.quantity).toLocaleString()}</span>
+                      <span className="text-slate-900 font-bold">${((item.price || item.product?.price || 0) * item.quantity).toLocaleString()}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="flex justify-between items-end pt-4 border-t border-slate-700/50">
-                    <span className="text-slate-300">Total Final</span>
-                    <span className="text-3xl font-black text-white">${(order?.total_amount || order?.total || 0).toLocaleString()}</span>
+                <div className="flex justify-between items-end pt-6 border-t border-slate-200">
+                    <span className="text-slate-500 font-bold">Total Final</span>
+                    <span className="text-4xl font-black text-slate-900">${(order?.total_amount || order?.total || 0).toLocaleString()}</span>
                 </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-5">
               <button 
                 onClick={handleDownload} 
                 disabled={isDownloading} 
-                className="w-full bg-white text-slate-900 font-black uppercase tracking-widest py-5 rounded-2xl flex items-center justify-center gap-3 shadow-xl transition-all active:scale-95 disabled:opacity-50"
+                className="w-full btn-brand py-5 text-lg flex items-center justify-center gap-3"
               >
-                {isDownloading ? <Loader2 className="animate-spin" /> : <><Download size={20} /> Descargar Factura PDF</>}
+                {isDownloading ? <Loader2 className="animate-spin text-white" /> : <><Download size={22} /> Descargar Factura PDF</>}
               </button>
 
-              <Link to="/products" className="block w-full text-slate-500 hover:text-white font-bold py-4 underline underline-offset-8 decoration-slate-700 transition-colors">
+              <Link to="/products" className="block w-full text-slate-400 hover:text-blue-600 font-black text-[10px] uppercase tracking-[0.2em] transition-all py-2">
                 Seguir equipando mi PC
               </Link>
             </div>

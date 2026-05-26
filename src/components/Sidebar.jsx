@@ -24,7 +24,6 @@ const Sidebar = () => {
   const menuItems = isAdmin ? [
     { name: 'Productos', icon: <Package size={20} />, path: '/admin/products' },
     { name: 'Categorías', icon: <Tags size={20} />, path: '/admin/categories' },
-    { name: 'Soporte IA', icon: <Bot size={20} />, path: '/admin/ai-support' },
   ] : [
     { name: 'Dashboard', icon: <LayoutDashboard size={20} />, path: '/home' },
     { name: 'Productos', icon: <ShoppingBag size={20} />, path: '/products' },
@@ -32,9 +31,9 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-64 bg-slate-800 border-r border-slate-700 hidden md:flex flex-col h-screen sticky top-0">
-      <div className="p-6">
-        <h2 className="text-2xl font-bold text-blue-500 tracking-tight">TechZone</h2>
+    <aside className="w-64 bg-white border-r border-slate-200 hidden md:flex flex-col h-screen sticky top-0 shadow-sm">
+      <div className="p-8">
+        <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-500 bg-clip-text text-transparent tracking-tight">TechZone</h2>
       </div>
       
       <nav className="flex-1 px-4 space-y-2">
@@ -44,33 +43,36 @@ const Sidebar = () => {
             <Link
               key={item.path}
               to={item.path}
-              className={`flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group ${
+              className={`flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 group ${
                 isActive 
-                  ? 'bg-blue-600/10 text-blue-500' 
-                  : 'text-slate-400 hover:bg-slate-700/50 hover:text-white'
+                  ? 'bg-blue-50 text-blue-600 shadow-sm' 
+                  : 'text-slate-500 hover:bg-slate-50 hover:text-blue-600'
               }`}
             >
               <div className="flex items-center gap-3">
-                {item.icon}
-                <span className="font-medium">{item.name}</span>
+                <div className={`transition-colors ${isActive ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600'}`}>
+                  {item.icon}
+                </div>
+                <span className="font-bold text-sm tracking-tight">{item.name}</span>
               </div>
-              {isActive && <ChevronRight size={16} className="animate-in slide-in-from-left-1" />}
+              {isActive && <ChevronRight size={16} className="text-blue-600" />}
             </Link>
           );
         })}
       </nav>
 
-      <div className="p-4 border-t border-slate-700">
+      <div className="p-6 border-t border-slate-100">
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 px-4 py-3 w-full text-red-400 hover:bg-red-500/10 rounded-xl transition-all group"
+          className="flex items-center gap-3 px-4 py-3 w-full text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all group font-bold text-sm"
         >
-          <LogOut size={20} className="group-hover:translate-x-1 transition-transform" />
-          <span className="font-medium">Cerrar Sesión</span>
+          <LogOut size={20} className="transition-transform group-hover:-translate-x-1" />
+          <span>Cerrar Sesión</span>
         </button>
       </div>
     </aside>
   );
 };
+
 
 export default Sidebar;
