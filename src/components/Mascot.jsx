@@ -51,7 +51,7 @@ const Mascot = () => {
     >
       {position.side === 'right' && (
         <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-2xl relative animate-in slide-in-from-right-10">
-          <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-b border-l border-slate-200 rotate-45"></div>
+          <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-b border-l border-slate-200 -rotate-45"></div>
           <p className="text-sm font-bold text-slate-700 whitespace-nowrap">{message}</p>
         </div>
       )}
@@ -60,7 +60,7 @@ const Mascot = () => {
       </div>
       {position.side === 'left' && (
         <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-2xl relative animate-in slide-in-from-left-10">
-          <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-b border-l border-slate-200 rotate-45"></div>
+          <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-b border-r border-slate-200 -rotate-45"></div>
           <p className="text-sm font-bold text-slate-700 whitespace-nowrap">{message}</p>
         </div>
       )}

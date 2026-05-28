@@ -224,7 +224,7 @@ const AdminProducts = () => {
             {products.map((product) => (
               <div key={product.id} className="card-white overflow-hidden group flex flex-col">
                 <div className="h-48 overflow-hidden relative bg-slate-50 border-b border-slate-100">
-                  <img src={product.image_url || 'https://via.placeholder.com/300'} alt={product.name} className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500" />
+                  <img src={product.image_url || 'https://via.placeholder.com/300'} alt={product.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                   <div className="absolute top-3 right-3 flex gap-2">
                     <button onClick={() => handleOpenModal(product)} className="p-2 bg-white/90 backdrop-blur-sm text-blue-600 hover:bg-blue-600 hover:text-white rounded-lg shadow-sm transition-all border border-slate-100"><Edit2 size={16} /></button>
                     <button onClick={() => setConfirmModal({ open: true, id: product.id })} className="p-2 bg-white/90 backdrop-blur-sm text-red-500 hover:bg-red-500 hover:text-white rounded-lg shadow-sm transition-all border border-slate-100"><Trash2 size={16} /></button>
@@ -276,7 +276,7 @@ const AdminProducts = () => {
                   <div className="relative aspect-square bg-slate-50 border-2 border-dashed border-slate-200 rounded-3xl overflow-hidden flex flex-col items-center justify-center group hover:border-blue-500/50 transition-all cursor-pointer">
                     {previewUrl ? (
                       <>
-                        <img src={previewUrl} alt="Preview" className="w-full h-full object-contain p-4 transition-all group-hover:scale-105 group-hover:opacity-40" />
+                        <img src={previewUrl} alt="Preview" className="w-full h-full object-cover transition-all group-hover:scale-105 group-hover:opacity-40" />
                         <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10">
                           <Upload className="text-blue-600 mb-2" size={32} />
                           <span className="text-[10px] font-black uppercase text-blue-600">Cambiar Imagen</span>

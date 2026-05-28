@@ -1,9 +1,48 @@
 import { Link } from 'react-router-dom';
 import { Zap, ChevronRight, Mail, ShieldCheck, Truck, Headphones } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 const LandingPage = () => {
   const { user, isAdmin } = useAuth();
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+
+  // Array de videos - agregar más aquí
+  const videos = [
+    "/assets/Ultra_realistic_cinematic_Intel_processor_presentation,_dark_technological_atmosphere,_subtle_blue_r_seed505085812.mp4",
+    "/assets/Ultra_realistic_cinematic_NVIDIA_GeForce_RTX_3060_presentation,_dark_futuristic_environment,_premium_seed990018413.mp4",
+    "/assets/Ultra_realistic_cinematic_Thermaltake_RGB_16GB_RAM_presentation,_futuristic_dark_PC_environment,_ele_seed4103772441.mp4"
+  ];
+
+  useEffect(() => {
+    const handleVideoEnd = () => {
+      setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
+    };
+
+    const handleVideoError = (e) => {
+      console.error("Error en video:", e);
+      setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
+    };
+
+    const videoElement = document.getElementById('hero-video');
+    if (videoElement) {
+      videoElement.addEventListener('ended', handleVideoEnd);
+      videoElement.addEventListener('error', handleVideoError);
+      
+      // Timeout de respaldo: si el video dura más de 20 segundos sin terminar, pasar al siguiente
+      const timeoutId = setTimeout(() => {
+        if (videoElement && !videoElement.paused) {
+          setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
+        }
+      }, 20000);
+
+      return () => {
+        videoElement.removeEventListener('ended', handleVideoEnd);
+        videoElement.removeEventListener('error', handleVideoError);
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [currentVideoIndex, videos.length]);
 
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100">
@@ -82,13 +121,33 @@ const LandingPage = () => {
           <div className="flex-1 w-full max-w-md animate-in fade-in slide-in-from-right-12 duration-1000">
             <div className="promo-banner aspect-[9/16] md:aspect-square group relative">
               <video 
-                src="/assets/Ultra_realistic_cinematic_Intel_processor_presentation,_dark_technological_atmosphere,_subtle_blue_r_seed505085812.mp4" 
+                id="hero-video"
+                key={currentVideoIndex}
+                src={videos[currentVideoIndex]}
                 autoPlay
                 muted
-                loop
-                className="promo-video opacity-80 w-full h-full object-cover"
+                playsInline
+                preload="auto"
+                className="promo-video w-full h-full object-cover animate-video-fade"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60"></div>
+              
+              {/* Indicadores de Carrusel */}
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+                {videos.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentVideoIndex(index)}
+                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                      currentVideoIndex === index 
+                        ? "bg-blue-500 w-8" 
+                        : "bg-white/30 hover:bg-white/50"
+                    }`}
+                    aria-label={`Ir al video ${index + 1}`}
+                  />
+                ))}
+              </div>
+
               <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-blue-600/20 rounded-full blur-3xl group-hover:bg-blue-500/40 transition-all"></div>
             </div>
           </div>

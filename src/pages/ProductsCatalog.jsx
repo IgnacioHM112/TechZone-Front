@@ -70,20 +70,24 @@ const ProductsCatalog = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 pt-24 pb-12">
+    <div className="min-h-screen bg-[#0B0F1A] text-white pt-24 pb-12 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-30 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-emerald-600/20 rounded-full blur-[120px]"></div>
+      </div>
       <SimpleNavbar />
       
-      <div className="max-w-7xl mx-auto px-6 mt-8">
+      <div className="max-w-7xl mx-auto px-6 mt-8 relative z-10">
         <header className="mb-12 text-center md:text-left">
-          <h1 className="text-5xl font-black text-slate-900 mb-4 tracking-tight">Componentes de PC</h1>
-          <p className="text-slate-500 text-lg max-w-2xl font-medium">Seleccioná los mejores componentes para tu próxima configuración.</p>
+          <h1 className="text-5xl font-black text-white mb-4 tracking-tight">Componentes de PC</h1>
+          <p className="text-slate-400 text-lg max-w-2xl font-medium">Seleccioná los mejores componentes para tu próxima configuración.</p>
         </header>
 
         {/* Categorías Estilo Ejemplo-3 */}
         <div className="flex flex-wrap gap-3 mb-8 justify-center md:justify-start">
           <button 
             onClick={() => handleFilterChange({ category_id: '' })}
-            className={`px-8 py-3 rounded-full text-sm font-black transition-all ${!filters.category_id ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'bg-white border border-slate-200 text-slate-500 hover:bg-slate-50'}`}
+            className={`px-8 py-3 rounded-full text-sm font-black transition-all ${!filters.category_id ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'bg-white/5 backdrop-blur-sm border border-white/10 text-slate-400 hover:bg-white/10'}`}
           >
             Todos
           </button>
@@ -91,7 +95,7 @@ const ProductsCatalog = () => {
             <button 
               key={cat.id}
               onClick={() => handleFilterChange({ category_id: cat.id })}
-              className={`px-8 py-3 rounded-full text-sm font-black transition-all ${filters.category_id === cat.id ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'bg-white border border-slate-200 text-slate-500 hover:bg-slate-50'}`}
+              className={`px-8 py-3 rounded-full text-sm font-black transition-all ${filters.category_id === cat.id ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'bg-white/5 backdrop-blur-sm border border-white/10 text-slate-400 hover:bg-white/10'}`}
             >
               {cat.name}
             </button>
@@ -99,12 +103,12 @@ const ProductsCatalog = () => {
         </div>
 
         {/* Filtros Horizontales Debajo de Categorías */}
-        <div className="bg-white border border-slate-200 p-6 rounded-[2rem] shadow-sm mb-12 flex flex-col md:flex-row gap-6 items-center">
+        <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-[2rem] mb-12 flex flex-col md:flex-row gap-6 items-center">
           <div className="flex-1 w-full relative group">
-            <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={20} />
+            <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-blue-400 transition-colors" size={20} />
             <input 
               type="text" placeholder="Buscar por nombre o modelo..."
-              className="w-full bg-slate-50 border border-slate-200 rounded-2xl py-3.5 pl-14 pr-6 outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-bold text-slate-700"
+              className="w-full bg-white/5 border border-white/10 rounded-2xl py-3.5 pl-14 pr-6 outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-400 transition-all font-bold text-white placeholder-slate-500"
               value={filters.name}
               onChange={(e) => handleFilterChange({ name: e.target.value })}
             />
@@ -112,26 +116,26 @@ const ProductsCatalog = () => {
           
           <div className="flex flex-wrap gap-4 w-full md:w-auto">
             <select 
-              className="flex-1 md:w-48 bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3.5 text-sm font-bold text-slate-700 outline-none focus:border-blue-500 transition-all cursor-pointer appearance-none"
+              className="flex-1 md:w-48 bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-white outline-none focus:border-blue-400 transition-all cursor-pointer appearance-none"
               value={filters.sort}
               onChange={(e) => handleFilterChange({ sort: e.target.value })}
             >
-              <option value="">Más Recientes</option>
-              <option value="price_asc">Menor Precio</option>
-              <option value="price_desc">Mayor Precio</option>
+              <option value="" style={{backgroundColor: '#1A222F'}}>Más Recientes</option>
+              <option value="price_asc" style={{backgroundColor: '#1A222F'}}>Menor Precio</option>
+              <option value="price_desc" style={{backgroundColor: '#1A222F'}}>Mayor Precio</option>
             </select>
 
             <div className="flex items-center gap-2">
               <input 
                 type="number" placeholder="Min $"
-                className="w-24 bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3.5 text-sm font-bold text-slate-700 outline-none focus:border-blue-500"
+                className="w-24 bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm font-bold text-white placeholder-slate-500 outline-none focus:border-blue-400"
                 value={filters.minPrice}
                 onChange={(e) => handleFilterChange({ minPrice: e.target.value })}
               />
-              <span className="text-slate-300 font-bold">-</span>
+              <span className="text-slate-500 font-bold">-</span>
               <input 
                 type="number" placeholder="Max $"
-                className="w-24 bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3.5 text-sm font-bold text-slate-700 outline-none focus:border-blue-500"
+                className="w-24 bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm font-bold text-white placeholder-slate-500 outline-none focus:border-blue-400"
                 value={filters.maxPrice}
                 onChange={(e) => handleFilterChange({ maxPrice: e.target.value })}
               />
@@ -142,8 +146,8 @@ const ProductsCatalog = () => {
         <section>
           {loading ? (
             <div className="flex flex-col items-center justify-center py-32 gap-6">
-              <Loader2 className="w-16 h-16 text-blue-600 animate-spin" />
-              <p className="text-slate-500 font-bold tracking-tight animate-pulse text-lg">Cargando componentes...</p>
+              <Loader2 className="w-16 h-16 text-blue-400 animate-spin" />
+              <p className="text-slate-400 font-bold tracking-tight animate-pulse text-lg">Cargando componentes...</p>
             </div>
           ) : products.length > 0 ? (
             <>
@@ -151,33 +155,33 @@ const ProductsCatalog = () => {
                 {products.map(product => {
                   const isOutOfStock = product.stock === 0;
                   return (
-                    <div key={product.id} className={`bg-white border border-slate-200 rounded-[2.5rem] overflow-hidden group hover:border-blue-300 hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-500 shadow-sm flex flex-col ${isOutOfStock ? 'opacity-70' : ''}`}>
-                      <div className="h-64 relative overflow-hidden bg-slate-50/50 p-6 flex items-center justify-center">
-                        <img src={product.image_url || 'https://via.placeholder.com/400'} alt={product.name} className={`w-full h-full object-contain transition-transform duration-700 ${!isOutOfStock ? 'group-hover:scale-110' : 'grayscale'}`} />
-                        {isOutOfStock && <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] flex items-center justify-center"><span className="bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest px-5 py-2.5 rounded-full shadow-lg">Sin stock</span></div>}
+                    <div key={product.id} className={`bg-white/5 backdrop-blur-sm border border-white/10 rounded-[2.5rem] overflow-hidden group hover:bg-white/10 hover:border-blue-400/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 flex flex-col ${isOutOfStock ? 'opacity-70' : ''}`}>
+                      <div className="h-64 relative overflow-hidden bg-gradient-to-br from-blue-900/20 to-emerald-900/20 flex items-center justify-center">
+                        <img src={product.image_url || 'https://via.placeholder.com/400'} alt={product.name} className={`w-full h-full object-cover transition-transform duration-700 ${!isOutOfStock ? 'group-hover:scale-110' : 'grayscale'}`} />
+                        {isOutOfStock && <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex items-center justify-center"><span className="bg-red-600 text-white text-[10px] font-black uppercase tracking-widest px-5 py-2.5 rounded-full shadow-lg">Sin stock</span></div>}
                       </div>
                       <div className="p-8 flex-1 flex flex-col">
                         <div className="flex justify-between items-start mb-4">
-                          <span className="text-[10px] font-black text-blue-600 uppercase tracking-[0.2em]">{product.category?.name || 'Hardware'}</span>
+                          <span className="text-[10px] font-black text-blue-400 uppercase tracking-[0.2em]">{product.category?.name || 'Hardware'}</span>
                           <div className="flex gap-0.5">
                             {[...Array(5)].map((_, i) => (
                               <span key={i} className="text-amber-400 text-xs">★</span>
                             ))}
                           </div>
                         </div>
-                        <h3 className="text-lg font-extrabold text-slate-900 mb-3 line-clamp-2 leading-tight group-hover:text-blue-600 transition-colors min-h-[3rem]">{product.name}</h3>
-                        <p className="text-slate-500 text-xs line-clamp-2 mb-6 font-medium leading-relaxed">
+                        <h3 className="text-lg font-extrabold text-white mb-3 line-clamp-2 leading-tight group-hover:text-blue-400 transition-colors min-h-[3rem]">{product.name}</h3>
+                        <p className="text-slate-400 text-xs line-clamp-2 mb-6 font-medium leading-relaxed">
                           ⚡ {product.description} 🚀
                         </p>
                         <div className="flex items-center gap-3 mb-8">
-                          <span className={`text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full border ${isOutOfStock ? 'bg-red-50 text-red-500 border-red-100' : 'bg-emerald-50 text-emerald-600 border-emerald-100'}`}>
+                          <span className={`text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full border ${isOutOfStock ? 'bg-red-900/30 text-red-400 border-red-400/50' : 'bg-emerald-900/30 text-emerald-400 border-emerald-400/50'}`}>
                             {isOutOfStock ? '⚠️ Agotado' : '✓ En stock'}
                           </span>
                         </div>
-                        <div className="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
+                        <div className="mt-auto pt-6 border-t border-white/10 flex items-center justify-between">
                           <div className="flex flex-col">
-                            <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-0.5">Precio</span>
-                            <span className="text-2xl font-black text-slate-900">${product.price.toLocaleString()}</span>
+                            <span className="text-[10px] text-slate-500 font-black uppercase tracking-widest mb-0.5">Precio</span>
+                            <span className="text-2xl font-black text-white">${product.price.toLocaleString()}</span>
                           </div>
                           <button 
                             disabled={isOutOfStock} 
@@ -200,7 +204,7 @@ const ProductsCatalog = () => {
                   <button 
                     disabled={filters.page === 1}
                     onClick={() => setFilters({ ...filters, page: filters.page - 1 })}
-                    className="w-14 h-14 rounded-2xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-blue-600 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm flex items-center justify-center"
+                    className="w-14 h-14 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 text-slate-400 hover:bg-white/10 hover:text-blue-400 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center"
                   >
                     <ChevronLeft size={24} />
                   </button>
@@ -212,8 +216,8 @@ const ProductsCatalog = () => {
                         onClick={() => setFilters({ ...filters, page: i + 1 })}
                         className={`w-14 h-14 rounded-2xl font-black text-lg transition-all ${
                           filters.page === i + 1 
-                          ? 'bg-slate-900 text-white shadow-xl shadow-slate-900/20' 
-                          : 'bg-white text-slate-400 border border-slate-100 hover:border-slate-300 hover:text-slate-900'
+                          ? 'bg-blue-600 text-white shadow-xl shadow-blue-600/20' 
+                          : 'bg-white/5 backdrop-blur-sm text-slate-400 border border-white/10 hover:bg-white/10 hover:text-slate-200'
                         }`}
                       >
                         {i + 1}
@@ -224,7 +228,7 @@ const ProductsCatalog = () => {
                   <button 
                     disabled={filters.page === meta.totalPages}
                     onClick={() => setFilters({ ...filters, page: filters.page + 1 })}
-                    className="w-14 h-14 rounded-2xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-blue-600 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm flex items-center justify-center"
+                    className="w-14 h-14 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 text-slate-400 hover:bg-white/10 hover:text-blue-400 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center"
                   >
                     <ChevronRight size={24} />
                   </button>
@@ -232,12 +236,12 @@ const ProductsCatalog = () => {
               )}
             </>
           ) : (
-            <div className="flex flex-col items-center justify-center py-32 text-center bg-white rounded-[3rem] border border-slate-100 shadow-sm mt-10">
-              <div className="w-24 h-24 bg-slate-50 rounded-[2rem] flex items-center justify-center mb-8 text-slate-300 shadow-inner">
+            <div className="flex flex-col items-center justify-center py-32 text-center bg-white/5 backdrop-blur-sm rounded-[3rem] border border-white/10 mt-10">
+              <div className="w-24 h-24 bg-white/5 rounded-[2rem] flex items-center justify-center mb-8 text-slate-500">
                 <PackageX size={48} />
               </div>
-              <h3 className="text-3xl font-black text-slate-900 mb-3 tracking-tight">No hay resultados</h3>
-              <p className="text-slate-500 font-medium max-w-sm">No encontramos productos que coincidan con tu búsqueda actual.</p>
+              <h3 className="text-3xl font-black text-white mb-3 tracking-tight">No hay resultados</h3>
+              <p className="text-slate-400 font-medium max-w-sm">No encontramos productos que coincidan con tu búsqueda actual.</p>
             </div>
           )}
         </section>

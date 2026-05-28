@@ -64,11 +64,11 @@ const CartPage = () => {
                     className={`bg-white border border-slate-100 rounded-[2.5rem] p-8 flex flex-col sm:flex-row items-center gap-8 group hover:border-blue-200 transition-all shadow-sm hover:shadow-xl hover:shadow-slate-200/50 ${isUpdating ? 'opacity-50 pointer-events-none' : ''}`}
                   >
                     {/* Miniatura */}
-                    <div className="w-28 h-28 bg-slate-50 rounded-2xl overflow-hidden flex-shrink-0 flex items-center justify-center p-4">
+                    <div className="w-28 h-28 bg-slate-50 rounded-2xl overflow-hidden flex-shrink-0">
                       <img 
                         src={item.product.image_url || 'https://via.placeholder.com/100'} 
                         alt={item.product.name}
-                        className="w-full h-full object-contain"
+                        className="w-full h-full object-cover"
                       />
                     </div>
 

@@ -106,3 +106,12 @@ input:focus::placeholder {
 ::-webkit-scrollbar-thumb {
   @apply bg-slate-300 rounded-full hover:bg-slate-400 transition-colors;
 }
+
+@keyframes videoFadeIn {
+  from { opacity: 0; }
+  to { opacity: 0.8; }
+}
+
+.animate-video-fade {
+  animation: videoFadeIn 1.5s ease-out forwards;
+}
