@@ -23,16 +23,15 @@ const SimpleNavbar = () => {
           <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform">
             <span className="font-bold text-xl text-white">T</span>
           </div>
-          <span className="text-2xl font-extrabold tracking-tight text-slate-900">TechZone</span>
+          <span className="text-2xl font-extrabold tracking-tight text-white">TechZone</span>
         </Link>
 
         {/* Acciones */}
         <div className="flex items-center gap-6">
-          <a href="/#contact" className="hidden md:block text-slate-500 hover:text-blue-600 text-sm font-bold transition-colors">Contacto</a>
           {/* Carrito */}
           <Link 
             to="/cart" 
-            className="relative p-2 text-slate-500 hover:text-blue-600 transition-colors group"
+            className="relative p-2 text-slate-100 hover:text-blue-400 transition-colors group"
           >
             <ShoppingCart size={24} />
             {totalItems > 0 && (
@@ -91,12 +90,12 @@ const SimpleNavbar = () => {
             </div>
           ) : (
             <div className="flex items-center gap-4">
-              <Link to="/login" className="text-slate-500 hover:text-blue-600 text-sm font-bold transition-colors">Entrar</Link>
+              <Link to="/login" className="text-slate-100 hover:text-blue-400 text-sm font-bold transition-colors uppercase tracking-widest">INGRESAR</Link>
               <Link 
                 to="/register" 
-                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-blue-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-blue-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all uppercase tracking-widest"
               >
-                Crear cuenta
+                REGISTRARSE
               </Link>
             </div>
           )}

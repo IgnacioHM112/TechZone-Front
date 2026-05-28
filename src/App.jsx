@@ -28,6 +28,16 @@ const ChatBotWrapper = () => {
   return <ChatBot />;
 };
 
+// Componente para mostrar la mascota excepto en rutas de admin
+const MascotWrapper = () => {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
+  if (isAdminRoute) return null;
+
+  return <Mascot />;
+};
+
 // Componente para redirigir si el usuario ya está logueado
 const PublicRoute = ({ children }) => {
   const { user, isAdmin, loading } = useAuth();
@@ -135,7 +145,7 @@ function App() {
           />
           <AppRoutes />
           <ChatBotWrapper />
-          <Mascot />
+          <MascotWrapper />
         </Router>
       </CartProvider>
     </AuthProvider>

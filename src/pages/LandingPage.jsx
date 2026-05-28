@@ -11,7 +11,9 @@ const LandingPage = () => {
   const videos = [
     "/assets/Ultra_realistic_cinematic_Intel_processor_presentation,_dark_technological_atmosphere,_subtle_blue_r_seed505085812.mp4",
     "/assets/Ultra_realistic_cinematic_NVIDIA_GeForce_RTX_3060_presentation,_dark_futuristic_environment,_premium_seed990018413.mp4",
-    "/assets/Ultra_realistic_cinematic_Thermaltake_RGB_16GB_RAM_presentation,_futuristic_dark_PC_environment,_ele_seed4103772441.mp4"
+    "/assets/Ultra_realistic_cinematic_Thermaltake_RGB_16GB_RAM_presentation,_futuristic_dark_PC_environment,_ele_seed4103772441.mp4",
+    "/assets/Ultra_realistic_cinematic_gabinete_presentation,_dark_pc_chassis,_streamlined_tech_seed123456.mp4",
+    "/assets/Ultra_realistic_cinematic_placa_madre_motherboard_showcase,_cyberpunk_pc_interior_seed987654.mp4"
   ];
 
   useEffect(() => {
@@ -45,21 +47,20 @@ const LandingPage = () => {
   }, [currentVideoIndex, videos.length]);
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100">
+    <div className="min-h-screen bg-slate-950 text-white selection:bg-blue-100">
       {/* Navbar Minimalista */}
-      <nav className="fixed top-0 w-full z-50 bg-slate-50 shadow-sm border-b border-slate-200 transition-all">
+      <nav className="fixed top-0 w-full z-50 bg-slate-950 shadow-sm border-b border-slate-800 transition-all">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 group transition-all">
             <div className="w-9 h-9 bg-gradient-to-br from-blue-600 to-emerald-500 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform">
               <span className="font-bold text-lg text-white">T</span>
             </div>
-            <span className="text-xl font-black tracking-tight text-slate-900">TechZone</span>
+            <span className="text-xl font-black tracking-tight text-white">TechZone</span>
           </Link>
           
           <div className="flex items-center gap-8">
-            <div className="hidden md:flex gap-8 text-xs font-black uppercase tracking-widest text-slate-500">
-              <a href="#features" className="hover:text-blue-600 transition-colors">Características</a>
-              <a href="#contact" className="hover:text-blue-600 transition-colors">Contacto</a>
+            <div className="hidden md:flex gap-4 text-xs font-black uppercase tracking-widest">
+              <a href="#contact" className="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-blue-300 hover:text-blue-200 hover:bg-blue-500/10 transition-colors">Contacto</a>
             </div>
             {user ? (
               <Link 
@@ -72,15 +73,15 @@ const LandingPage = () => {
               <div className="flex items-center gap-4">
                 <Link 
                   to="/login" 
-                  className="text-slate-600 hover:text-blue-600 transition-colors font-black text-xs uppercase tracking-widest px-2"
+                  className="text-slate-100 hover:text-blue-400 transition-colors font-black text-xs uppercase tracking-widest px-2"
                 >
-                  Entrar
+                  INGRESAR
                 </Link>
                 <Link 
                   to="/register" 
                   className="btn-brand px-6 py-2 text-xs uppercase tracking-widest font-black"
                 >
-                  Unirse
+                  REGISTRARSE
                 </Link>
               </div>
             )}
@@ -102,12 +103,11 @@ const LandingPage = () => {
               Líderes en Hardware High-End
             </div>
             <h1 className="text-5xl md:text-7xl font-black tracking-tight text-white mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 leading-[1.1]">
-              Construí tu <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Próxima Bestia.</span>
+              Hardware para los que <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">construyen el futuro.</span>
             </h1>
             <p className="text-lg text-slate-400 max-w-xl mb-12 animate-in fade-in slide-in-from-bottom-12 duration-1000 font-medium leading-relaxed">
-              Componentes premium seleccionados para entusiastas del rendimiento. 
-              Elevá tu experiencia de juego y trabajo al nivel definitivo.
+              TechZone es el ecommerce definitivo de hardware. Componentes de alto rendimiento, periféricos premium y la mejor tecnología en un solo lugar.
             </p>
             <div className="flex flex-col sm:flex-row gap-5 animate-in fade-in slide-in-from-bottom-16 duration-1000">
               <Link to="/products" className="btn-brand px-10 py-4 text-sm uppercase tracking-widest font-black flex items-center justify-center gap-3 group">

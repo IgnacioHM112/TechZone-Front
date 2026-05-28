@@ -39,33 +39,34 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4 pt-24">
+    <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4 pt-24">
       <SimpleNavbar />
-      <div className="max-w-md w-full bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-10 border border-slate-100">
+      <div className="max-w-md w-full bg-slate-900 rounded-3xl shadow-xl shadow-slate-950/50 p-10 border border-slate-800">
         <div className="flex flex-col items-center mb-8">
           <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-emerald-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-blue-500/20">
             <LogIn className="text-white w-8 h-8" />
           </div>
-          <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">TechZone</h1>
-          <p className="text-slate-500 mt-2 font-medium">Bienvenido de nuevo</p>
+          <h1 className="text-3xl font-extrabold text-white tracking-tight">TechZone</h1>
+          <p className="text-slate-400 mt-2 font-medium">Bienvenido de nuevo</p>
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-100 text-red-600 px-4 py-3 rounded-xl mb-6 text-sm font-medium flex items-center gap-2">
-            <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+          <div className="bg-red-500/10 border border-red-500/20 text-red-100 px-4 py-3 rounded-xl mb-6 text-sm font-medium flex items-center gap-2">
+            <div className="w-2 h-2 bg-red-500 rounded-full"></div>
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-bold text-slate-700 mb-2 ml-1">Email</label>
-            <div className="relative group">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors w-5 h-5" />
+            <label className="block text-sm font-bold text-slate-100 mb-2 ml-1">Email</label>
+            <div className="input-with-icon">
+              <Mail className="input-icon" />
               <input
                 type="email"
                 required
-                className="input-brand pl-14 pr-4 py-3.5"
+                placeholder="Ingresa tu email"
+                className="input-brand"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -73,14 +74,14 @@ const Login = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-slate-700 mb-2 ml-1">Contraseña</label>
-            <div className="relative group">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors w-5 h-5" />
+            <label className="block text-sm font-bold text-slate-100 mb-2 ml-1">Contraseña</label>
+            <div className="input-with-icon">
+              <Lock className="input-icon" />
               <input
                 type={showPassword ? "text" : "password"}
                 required
-                className="input-brand pl-14 pr-12 py-3.5"
-
+                placeholder="Ingresa tu contraseña"
+                className="input-brand pr-12"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -97,22 +98,22 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full btn-brand py-4 flex items-center justify-center gap-3 text-lg"
+            className="w-full btn-brand py-4 flex items-center justify-center gap-3 text-lg uppercase tracking-widest"
           >
             {loading ? <Loader2 className="w-6 h-6 animate-spin text-white" /> : (
               <>
-                <span>Iniciar Sesión</span>
+                <span>INGRESAR</span>
                 <LogIn size={20} />
               </>
             )}
           </button>
         </form>
 
-        <div className="mt-10 pt-8 border-t border-slate-100 text-center">
-          <p className="text-slate-500 text-sm font-medium">
+        <div className="mt-10 pt-8 border-t border-slate-800 text-center">
+          <p className="text-slate-400 text-sm font-medium">
             ¿No tienes una cuenta?{' '}
-            <Link to="/register" className="text-blue-600 hover:text-blue-700 font-bold underline underline-offset-4 decoration-2">
-              Regístrate aquí
+            <Link to="/register" className="text-blue-400 hover:text-blue-300 font-bold underline underline-offset-4 decoration-2 uppercase tracking-wider">
+              REGISTRARSE
             </Link>
           </p>
         </div>

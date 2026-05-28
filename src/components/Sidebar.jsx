@@ -31,9 +31,9 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-64 bg-white border-r border-slate-200 hidden md:flex flex-col h-screen sticky top-0 shadow-sm">
+    <aside className="w-64 bg-slate-950 border-r border-slate-800 hidden md:flex flex-col h-screen sticky top-0 shadow-sm">
       <div className="p-8">
-        <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-500 bg-clip-text text-transparent tracking-tight">TechZone</h2>
+        <h2 className="text-2xl font-bold text-slate-100 tracking-tight">TechZone</h2>
       </div>
       
       <nav className="flex-1 px-4 space-y-2">
@@ -45,8 +45,8 @@ const Sidebar = () => {
               to={item.path}
               className={`flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 group ${
                 isActive 
-                  ? 'bg-blue-50 text-blue-600 shadow-sm' 
-                  : 'text-slate-500 hover:bg-slate-50 hover:text-blue-600'
+                  ? 'bg-blue-600/10 text-blue-400 shadow-sm' 
+                  : 'text-slate-400 hover:bg-slate-900 hover:text-blue-300'
               }`}
             >
               <div className="flex items-center gap-3">
@@ -61,10 +61,10 @@ const Sidebar = () => {
         })}
       </nav>
 
-      <div className="p-6 border-t border-slate-100">
+      <div className="p-6 border-t border-slate-800">
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 px-4 py-3 w-full text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all group font-bold text-sm"
+          className="flex items-center gap-3 px-4 py-3 w-full text-slate-400 hover:text-red-500 hover:bg-red-900 rounded-xl transition-all group font-bold text-sm"
         >
           <LogOut size={20} className="transition-transform group-hover:-translate-x-1" />
           <span>Cerrar Sesión</span>
