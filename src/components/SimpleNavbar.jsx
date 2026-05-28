@@ -49,7 +49,7 @@ const SimpleNavbar = () => {
                 className="flex items-center gap-3 pl-4 border-l border-slate-200 group"
               >
                 <div className="text-right hidden sm:block">
-                  <p className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{user.name}</p>
+                  <p className="text-sm font-bold text-slate-950 group-hover:text-blue-600 transition-colors">{user.name}</p>
                   <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{typeof user.role === 'object' ? user.role.name : user.role}</p>
                 </div>
                 <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center border border-slate-200 group-hover:border-blue-500 transition-all">

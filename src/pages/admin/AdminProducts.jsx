@@ -197,7 +197,7 @@ const AdminProducts = () => {
         </div>
         <div className="flex flex-wrap items-center gap-4">
           <select 
-            className="bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-slate-700"
+            className="bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-slate-950"
             value={filters.category_id}
             onChange={(e) => handleFilterChange({ category_id: e.target.value })}
           >
@@ -205,10 +205,10 @@ const AdminProducts = () => {
             {categories.map(cat => <option key={cat.id} value={cat.id}>{cat.name}</option>)}
           </select>
           <div className="flex items-center gap-2">
-            <input type="number" placeholder="Min" className="w-20 bg-white border border-slate-200 rounded-xl px-2 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" value={filters.minPrice} onChange={(e) => handleFilterChange({ minPrice: e.target.value })} />
-            <input type="number" placeholder="Max" className="w-20 bg-white border border-slate-200 rounded-xl px-2 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" value={filters.maxPrice} onChange={(e) => handleFilterChange({ maxPrice: e.target.value })} />
+            <input type="number" placeholder="Min" className="w-20 bg-white border border-slate-200 rounded-xl px-2 py-2.5 text-sm text-slate-950 outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" value={filters.minPrice} onChange={(e) => handleFilterChange({ minPrice: e.target.value })} />
+            <input type="number" placeholder="Max" className="w-20 bg-white border border-slate-200 rounded-xl px-2 py-2.5 text-sm text-slate-950 outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" value={filters.maxPrice} onChange={(e) => handleFilterChange({ maxPrice: e.target.value })} />
           </div>
-          <select className="bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-slate-700" value={filters.sort} onChange={(e) => handleFilterChange({ sort: e.target.value })}>
+          <select className="bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-slate-950" value={filters.sort} onChange={(e) => handleFilterChange({ sort: e.target.value })}>
             <option value="">Más Recientes</option>
             <option value="price_asc">Menor Precio</option>
             <option value="price_desc">Mayor Precio</option>
@@ -231,10 +231,10 @@ const AdminProducts = () => {
                   </div>
                 </div>
                 <div className="p-5 flex-1 flex flex-col">
-                  <h3 className="font-bold text-lg text-slate-800 truncate mb-2">{product.name}</h3>
-                  <p className="text-slate-500 text-sm line-clamp-2 mb-4 h-10 leading-relaxed">{product.description}</p>
-                  <div className="mt-auto flex justify-between items-center pt-4 border-t border-slate-100 text-slate-900 font-bold">
-                    <span className="text-blue-600">${product.price.toLocaleString()}</span>
+                  <h3 className="font-bold text-lg text-slate-100 truncate mb-2">{product.name}</h3>
+                  <p className="text-slate-300 text-sm line-clamp-2 mb-4 h-10 leading-relaxed">{product.description}</p>
+                  <div className="mt-auto flex justify-between items-center pt-4 border-t border-slate-100 text-slate-100 font-bold">
+                    <span className="text-blue-300">${product.price.toLocaleString()}</span>
                     <span className={`text-xs px-2 py-1 rounded-full ${product.stock > 0 ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}`}>Stock: {product.stock}</span>
                   </div>
                 </div>
