@@ -80,8 +80,8 @@ const AdminCategories = () => {
     <Layout title="Gestión de Categorías">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Categorías</h2>
-          <p className="text-slate-500">Organiza tus productos por grupos</p>
+          <h2 className="text-2xl font-bold text-slate-100">Categorías</h2>
+          <p className="text-slate-400">Organiza tus productos por grupos</p>
         </div>
         <button
           onClick={() => handleOpenModal()}
@@ -105,8 +105,8 @@ const AdminCategories = () => {
                     <button onClick={() => setConfirmModal({ open: true, id: cat.id })} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors border border-transparent hover:border-red-100"><Trash2 size={18} /></button>
                   </div>
                 </div>
-                <h3 className="text-xl font-bold mb-2 text-slate-800">{cat.name}</h3>
-                <p className="text-slate-500 text-sm line-clamp-2 leading-relaxed">{cat.description || 'Sin descripción disponible'}</p>
+                <h3 className="text-xl font-bold mb-2 text-slate-100">{cat.name}</h3>
+                <p className="text-slate-400 text-sm line-clamp-2 leading-relaxed">{cat.description || 'Sin descripción disponible'}</p>
               </div>
             ))}
           </div>
@@ -124,7 +124,7 @@ const AdminCategories = () => {
           )}
         </>
       ) : (
-        <div className="card-white border-dashed border-2 py-20 flex flex-col items-center justify-center text-center"><Tags size={40} className="mb-4 text-slate-300" /><h3 className="text-xl font-bold text-slate-800">Sin categorías</h3><p className="text-slate-500 mt-2">No se encontraron categorías registradas</p></div>
+        <div className="card-white border-dashed border-2 py-20 flex flex-col items-center justify-center text-center"><Tags size={40} className="mb-4 text-slate-300" /><h3 className="text-xl font-bold text-slate-100">Sin categorías</h3><p className="text-slate-400 mt-2">No se encontraron categorías registradas</p></div>
       )}
 
       {/* Modal */}

@@ -38,24 +38,24 @@ const Sidebar = () => {
       
       <nav className="flex-1 px-4 space-y-2">
         {menuItems.map((item) => {
-          const isActive = location.pathname === item.path;
+          const isActive = location.pathname.startsWith(item.path);
           return (
             <Link
               key={item.path}
               to={item.path}
               className={`flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 group ${
                 isActive 
-                  ? 'bg-blue-600/10 text-blue-400 shadow-sm' 
-                  : 'text-slate-400 hover:bg-slate-900 hover:text-blue-300'
+                  ? 'bg-blue-600/10 text-slate-100 shadow-sm' 
+                  : 'text-slate-300 hover:bg-slate-900 hover:text-blue-300'
               }`}
             >
               <div className="flex items-center gap-3">
-                <div className={`transition-colors ${isActive ? 'text-blue-600' : 'text-slate-400 group-hover:text-blue-600'}`}>
+                <div className={`transition-colors ${isActive ? 'text-blue-300' : 'text-slate-400 group-hover:text-blue-600'}`}>
                   {item.icon}
                 </div>
                 <span className="font-bold text-sm tracking-tight">{item.name}</span>
               </div>
-              {isActive && <ChevronRight size={16} className="text-blue-600" />}
+              {isActive && <ChevronRight size={16} className="text-blue-300" />}
             </Link>
           );
         })}
