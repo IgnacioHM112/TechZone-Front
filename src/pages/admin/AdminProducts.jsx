@@ -173,8 +173,8 @@ const AdminProducts = () => {
     <Layout title="Gestión de Productos">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">Inventario Pro</h2>
-          <p className="text-slate-500">Paginación y stock físico activados</p>
+          <h2 className="text-2xl font-bold tracking-tight text-slate-100">Inventario Pro</h2>
+          <p className="text-slate-400 font-medium">Paginación y stock físico activados</p>
         </div>
         <button
           onClick={() => handleOpenModal()}
@@ -256,7 +256,7 @@ const AdminProducts = () => {
           )}
         </>
       ) : (
-        <div className="card-white border-dashed border-2 py-20 flex flex-col items-center justify-center text-center"><PackageX size={40} className="mb-4 text-slate-300" /><h3 className="text-xl font-bold text-slate-800">No se encontraron productos</h3><p className="text-slate-500 mt-2">Intenta ajustar los filtros de búsqueda</p></div>
+        <div className="card-white border-dashed border-2 py-20 flex flex-col items-center justify-center text-center"><PackageX size={40} className="mb-4 text-slate-300" /><h3 className="text-xl font-bold text-slate-400">No se encontraron productos</h3><p className="text-slate-500 mt-2">Intenta ajustar los filtros de búsqueda</p></div>
       )}
 
       {/* Modales */}

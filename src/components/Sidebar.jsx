@@ -7,6 +7,7 @@ import {
   Settings, 
   Package, 
   Tags,
+  Users,
   Bot,
   ChevronRight
 } from 'lucide-react';
@@ -24,10 +25,10 @@ const Sidebar = () => {
   const menuItems = isAdmin ? [
     { name: 'Productos', icon: <Package size={20} />, path: '/admin/products' },
     { name: 'Categorías', icon: <Tags size={20} />, path: '/admin/categories' },
+    { name: 'Usuarios', icon: <Users size={20} />, path: '/admin/users' },
   ] : [
     { name: 'Dashboard', icon: <LayoutDashboard size={20} />, path: '/home' },
-    { name: 'Productos', icon: <ShoppingBag size={20} />, path: '/products' },
-    { name: 'Ajustes', icon: <Settings size={20} />, path: '/settings' },
+    { name: 'Volver al Catálogo', icon: <ShoppingBag size={20} />, path: '/products' },
   ];
 
   return (
@@ -61,15 +62,17 @@ const Sidebar = () => {
         })}
       </nav>
 
-      <div className="p-6 border-t border-slate-800">
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-3 px-4 py-3 w-full text-slate-400 hover:text-red-500 hover:bg-red-900 rounded-xl transition-all group font-bold text-sm"
-        >
-          <LogOut size={20} className="transition-transform group-hover:-translate-x-1" />
-          <span>Cerrar Sesión</span>
-        </button>
-      </div>
+      {isAdmin && (
+        <div className="p-6 border-t border-slate-800">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 px-4 py-3 w-full text-slate-400 hover:text-red-500 hover:bg-red-900 rounded-xl transition-all group font-bold text-sm"
+          >
+            <LogOut size={20} className="transition-transform group-hover:-translate-x-1" />
+            <span>Cerrar Sesión</span>
+          </button>
+        </div>
+      )}
     </aside>
   );
 };

@@ -20,7 +20,7 @@ const Layout = ({ children, title = 'Panel de Control' }) => {
               <div className="text-right hidden sm:block">
                 <p className="text-sm font-bold text-slate-100">{user?.name || 'Usuario'}</p>
                 <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
-                  {typeof user?.role === 'object' ? user.role.name : (user?.role || 'Usuario')}
+                  {user?.role && typeof user.role === 'object' ? user.role.name : (user?.role || 'Usuario')}
                 </p>
               </div>
               <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">

@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Bot, User } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import { getToken } from '../services/authService';
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,12 +34,19 @@ const ChatBot = () => {
     setInputValue('');
     setIsLoading(true);
 
+    const token = getToken();
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+
     try {
       const response = await fetch('/api/chatbot', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify({ message: userMessage.content }),
       });
 
@@ -116,7 +125,9 @@ const ChatBot = () => {
                   }`}
                 >
                   <div className="flex items-start gap-3">
-                    <p className="text-sm leading-relaxed font-medium">{message.content}</p>
+                    <div className="text-sm leading-relaxed font-medium markdown-content">
+                      <ReactMarkdown>{message.content}</ReactMarkdown>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -195,6 +206,31 @@ const ChatBot = () => {
         }
         .scrollbar-thin::-webkit-scrollbar-thumb:hover {
           #475569;
+        }
+        .markdown-content {
+          white-space: pre-wrap;
+        }
+        .markdown-content ul {
+          list-style-type: disc;
+          margin-left: 1.25rem;
+          margin-bottom: 1rem;
+        }
+        .markdown-content ol {
+          list-style-type: decimal;
+          margin-left: 1.25rem;
+          margin-bottom: 1rem;
+        }
+        .markdown-content li {
+          margin-bottom: 0.25rem;
+        }
+        .markdown-content p {
+          margin-bottom: 1rem;
+        }
+        .markdown-content p:last-child {
+          margin-bottom: 0;
+        }
+        .markdown-content strong {
+          font-weight: 700;
         }
       `}</style>
     </>

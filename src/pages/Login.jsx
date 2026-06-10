@@ -26,7 +26,7 @@ const Login = () => {
       login(user, token);
 
       // Redirección basada en rol
-      if (user.role === 'admin') {
+      if (user.role === 'admin' || (user.role && user.role.name === 'admin')) {
         navigate('/admin/products');
       } else {
         navigate('/products');

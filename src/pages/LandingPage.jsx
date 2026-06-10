@@ -165,7 +165,7 @@ const LandingPage = () => {
               <ul className="space-y-4 text-slate-400 text-sm font-bold">
                 <li className="flex items-center gap-3">
                   <Mail size={16} className="text-blue-500" />
-                  <span>info@techzone.com.ar</span>
+                  <span>Techzone.mza26@gmail.com</span>
                 </li>
                 <li>📍 Mendoza, Argentina</li>
                 <li>🕒 Lun–Vie 9:00–18:00</li>

@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import AdminHome from './pages/admin/AdminHome';
 import AdminProducts from './pages/admin/AdminProducts';
 import AdminCategories from './pages/admin/AdminCategories';
+import AdminUsers from './pages/admin/AdminUsers';
 import ProductsCatalog from './pages/ProductsCatalog';
 import CartPage from './pages/CartPage';
 import PaymentSuccess from './pages/PaymentSuccess';
@@ -96,7 +97,11 @@ function AppRoutes() {
       {/* Rutas de Usuario */}
       <Route
         path="/home"
-        element={<Navigate to="/products" replace />}
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
       />
 
       <Route
@@ -117,6 +122,14 @@ function AppRoutes() {
         element={
           <ProtectedRoute requireAdmin={true}>
             <AdminCategories />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/users"
+        element={
+          <ProtectedRoute requireAdmin={true}>
+            <AdminUsers />
           </ProtectedRoute>
         }
       />
