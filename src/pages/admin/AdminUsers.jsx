@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Layout from '../../components/Layout';
 import { getUsers, deleteUser } from '../../services/userService';
-import { Trash2, User, Mail, Shield, Search, Loader2, ShoppingBag, X, Calendar, DollarSign, ExternalLink } from 'lucide-react';
+import { Trash2, User, Mail, Shield, Search, Loader2, ShoppingBag, X, Calendar, DollarSign } from 'lucide-react';
 import toast from 'react-hot-toast';
 import ConfirmationModal from '../../components/ConfirmationModal';
 
@@ -269,9 +269,6 @@ const AdminUsers = () => {
                           <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider border shadow-sm ${getStatusColor(order.status)}`}>
                             {order.status}
                           </span>
-                          <button className="p-2.5 text-slate-500 hover:text-blue-400 hover:bg-blue-400/10 rounded-xl transition-all border border-transparent hover:border-blue-400/20" title="Ver detalles">
-                            <ExternalLink size={18} />
-                          </button>
                         </div>
                       </div>
                     </div>
