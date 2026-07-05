@@ -106,11 +106,11 @@ const PaymentSuccess = () => {
     return (
       <div className="min-h-screen bg-slate-950 text-slate-100 pt-24 flex items-center justify-center px-6">
         <SimpleNavbar />
-        <div className="max-w-md w-full bg-slate-900 border border-slate-800 rounded-[3rem] p-12 text-center shadow-2xl shadow-slate-950/50">
-          {error.type === 'security' ? <ShieldAlert size={72} className="text-amber-400 mx-auto mb-8" /> : <AlertCircle size={72} className="text-red-400 mx-auto mb-8" />}
-          <h1 className="text-3xl font-black mb-4 tracking-tight text-white">{error.type === 'security' ? 'Acceso Restringido' : 'Error en Sincronización'}</h1>
-          <p className="text-slate-300 mb-10 font-medium leading-relaxed">{error.mensaje}</p>
-          <Link to="/products" className="btn-brand block w-full py-4 text-lg">
+        <div className="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl md:rounded-[3rem] p-6 md:p-12 text-center shadow-2xl shadow-slate-950/50">
+          {error.type === 'security' ? <ShieldAlert size={64} className="text-amber-400 mx-auto mb-6" /> : <AlertCircle size={64} className="text-red-400 mx-auto mb-6" />}
+          <h1 className="text-2xl md:text-3xl font-black mb-4 tracking-tight text-white">{error.type === 'security' ? 'Acceso Restringido' : 'Error en Sincronización'}</h1>
+          <p className="text-slate-300 text-sm md:text-base mb-8 font-medium leading-relaxed">{error.mensaje}</p>
+          <Link to="/products" className="btn-brand block w-full py-4 text-base md:text-lg cursor-pointer">
             Ir a la Tienda
           </Link>
         </div>
@@ -122,16 +122,16 @@ const PaymentSuccess = () => {
     <div className="min-h-screen bg-slate-950 text-slate-100 pt-24 pb-20">
       <SimpleNavbar />
       <div className="max-w-2xl mx-auto px-6 text-center">
-        <div className="bg-slate-900 border border-slate-800 rounded-[3rem] p-12 shadow-2xl shadow-slate-950/60 relative overflow-hidden">
+        <div className="bg-slate-900 border border-slate-800 rounded-3xl md:rounded-[3rem] p-6 md:p-12 shadow-2xl shadow-slate-950/60 relative overflow-hidden">
           {/* Efectos visuales */}
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-50 rounded-full blur-3xl opacity-50"></div>
           
           <div className="relative z-10">
-            <div className="w-24 h-24 bg-emerald-500/10 text-emerald-400 rounded-3xl flex items-center justify-center mx-auto mb-10 shadow-sm border border-emerald-500/20">
-              <CheckCircle2 size={56} className="drop-shadow-sm" />
+            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-emerald-500/10 text-emerald-400 rounded-3xl flex items-center justify-center mx-auto mb-8 md:mb-10 shadow-sm border border-emerald-500/20">
+              <CheckCircle2 size={48} className="drop-shadow-sm" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter text-white">¡Gracias por tu compra!</h1>
-            <p className="text-slate-300 text-lg mb-10 leading-relaxed font-medium">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-black mb-4 tracking-tighter text-white">¡Gracias por tu compra!</h1>
+            <p className="text-slate-300 text-sm sm:text-lg mb-8 md:mb-10 leading-relaxed font-medium">
               La orden <span className="text-blue-600 font-black">#{order?.id || order_id}</span> ha sido procesada con éxito el {
                 (order?.createdAt || order?.created_at || order?.date) 
                 ? new Date(order?.createdAt || order?.created_at || order?.date).toLocaleDateString() 
@@ -139,27 +139,27 @@ const PaymentSuccess = () => {
               }.
             </p>
 
-            <div className="bg-slate-950 border border-slate-800 rounded-3xl p-8 mb-12 text-left shadow-inner">
-                <div className="flex justify-between items-center mb-6 border-b border-slate-200 pb-5">
+            <div className="bg-slate-950 border border-slate-800 rounded-3xl p-4 sm:p-8 mb-8 md:mb-12 text-left shadow-inner">
+                <div className="flex justify-between items-center mb-6 border-b border-slate-800 pb-5">
                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Resumen de inversión</span>
                     <span className="text-[10px] bg-emerald-500 text-white px-3 py-1.5 rounded-full font-black uppercase tracking-wider shadow-sm shadow-emerald-500/20">Pagado</span>
                 </div>
                 
                 {/* Lista de productos comprados */}
-                <div className="space-y-4 mb-8">
+                <div className="space-y-4 mb-8 text-sm">
                   {(order?.OrderItems || order?.items || order?.CartItems || []).map((item, idx) => (
-                    <div key={idx} className="flex justify-between items-center">
-                      <span className="text-slate-300 font-medium">
+                    <div key={idx} className="flex justify-between items-center gap-4">
+                      <span className="text-slate-300 font-medium truncate">
                         <span className="font-black text-white">{item.quantity}x</span> {item.Product?.name || item.product?.name || 'Producto'}
                       </span>
-                      <span className="text-white font-bold">${((item.price || item.product?.price || 0) * item.quantity).toLocaleString()}</span>
+                      <span className="text-white font-bold flex-shrink-0">${((item.price || item.product?.price || 0) * item.quantity).toLocaleString()}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="flex justify-between items-end pt-6 border-t border-slate-200">
-                    <span className="text-slate-300 font-bold">Total Final</span>
-                    <span className="text-4xl font-black text-white">${(order?.total_amount || order?.total || 0).toLocaleString()}</span>
+                <div className="flex justify-between items-end pt-6 border-t border-slate-800">
+                    <span className="text-slate-300 font-bold text-sm">Total Final</span>
+                    <span className="text-2xl sm:text-4xl font-black text-white">${(order?.total_amount || order?.total || 0).toLocaleString()}</span>
                 </div>
             </div>
 
@@ -167,7 +167,7 @@ const PaymentSuccess = () => {
               <button 
                 onClick={handleDownload} 
                 disabled={isDownloading} 
-                className="w-full btn-brand py-5 text-lg flex items-center justify-center gap-3"
+                className="w-full btn-brand py-4 md:py-5 text-base md:text-lg flex items-center justify-center gap-3 cursor-pointer"
               >
                 {isDownloading ? <Loader2 className="animate-spin text-white" /> : <><Download size={22} /> Descargar Factura PDF</>}
               </button>

@@ -129,7 +129,7 @@ const ResetPassword = () => {
                     type={showPassword ? "text" : "password"}
                     required
                     placeholder="Mínimo 6 caracteres"
-                    className="input-brand pr-12"
+                    className="input-brand py-3.5 rounded-xl pl-12 pr-12 text-sm"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={loading}
@@ -152,7 +152,7 @@ const ResetPassword = () => {
                     type={showConfirmPassword ? "text" : "password"}
                     required
                     placeholder="Repite tu contraseña"
-                    className="input-brand pr-12"
+                    className="input-brand py-3.5 rounded-xl pl-12 pr-12 text-sm"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     disabled={loading}

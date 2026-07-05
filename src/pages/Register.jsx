@@ -49,7 +49,7 @@ const Register = () => {
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4 pt-24">
       <SimpleNavbar />
-      <div className="max-w-md w-full bg-slate-900 rounded-3xl shadow-xl shadow-slate-950/50 p-10 border border-slate-800">
+      <div className="max-w-md w-full bg-slate-900 rounded-3xl shadow-xl shadow-slate-950/50 p-6 sm:p-10 border border-slate-800">
         <div className="flex flex-col items-center mb-8">
           <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-emerald-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-blue-500/20">
             <UserPlus className="text-white w-8 h-8" />
@@ -59,8 +59,8 @@ const Register = () => {
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-100 text-red-600 px-4 py-3 rounded-xl mb-6 text-sm font-medium flex items-center gap-2">
-            <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+          <div className="bg-red-500/10 border border-red-500/20 text-red-100 px-4 py-3 rounded-xl mb-6 text-sm font-medium flex items-center gap-2">
+            <div className="w-2 h-2 bg-red-500 rounded-full"></div>
             {error}
           </div>
         )}
@@ -75,7 +75,7 @@ const Register = () => {
                 name="name"
                 required
                 placeholder="Ingresa tu nombre"
-                className="input-brand"
+                className="input-brand py-3.5 rounded-xl pl-12 pr-4 text-sm"
                 value={formData.name}
                 onChange={handleChange}
               />
@@ -91,7 +91,7 @@ const Register = () => {
                 name="email"
                 required
                 placeholder="Ingresa tu email"
-                className="input-brand"
+                className="input-brand py-3.5 rounded-xl pl-12 pr-4 text-sm"
                 value={formData.email}
                 onChange={handleChange}
               />
@@ -107,7 +107,7 @@ const Register = () => {
                 name="password"
                 required
                 placeholder="Ingresa tu contraseña"
-                className="input-brand pr-12"
+                className="input-brand py-3.5 rounded-xl pl-12 pr-12 text-sm"
                 value={formData.password}
                 onChange={handleChange}
               />
@@ -130,7 +130,7 @@ const Register = () => {
                 name="confirmPassword"
                 required
                 placeholder="Confirma tu contraseña"
-                className="input-brand pr-12"
+                className="input-brand py-3.5 rounded-xl pl-12 pr-12 text-sm"
                 value={formData.confirmPassword}
                 onChange={handleChange}
               />

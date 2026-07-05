@@ -41,7 +41,7 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4 pt-24">
       <SimpleNavbar />
-      <div className="max-w-md w-full bg-slate-900 rounded-3xl shadow-xl shadow-slate-950/50 p-10 border border-slate-800">
+      <div className="max-w-md w-full bg-slate-900 rounded-3xl shadow-xl shadow-slate-950/50 p-6 sm:p-10 border border-slate-800">
         <div className="flex flex-col items-center mb-8">
           <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-emerald-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-blue-500/20">
             <LogIn className="text-white w-8 h-8" />
@@ -66,7 +66,7 @@ const Login = () => {
                 type="email"
                 required
                 placeholder="Ingresa tu email"
-                className="input-brand"
+                className="input-brand py-3.5 rounded-xl pl-12 pr-4 text-sm"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -81,7 +81,7 @@ const Login = () => {
                 type={showPassword ? "text" : "password"}
                 required
                 placeholder="Ingresa tu contraseña"
-                className="input-brand pr-12"
+                className="input-brand py-3.5 rounded-xl pl-12 pr-12 text-sm"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

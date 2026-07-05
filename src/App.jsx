@@ -17,7 +17,6 @@ import CartPage from './pages/CartPage';
 import PaymentSuccess from './pages/PaymentSuccess';
 import ProtectedRoute from './components/ProtectedRoute';
 import ChatBot from './components/ChatBot';
-import Mascot from './components/Mascot';
 import { Loader2 } from 'lucide-react';
 import './index.css';
 
@@ -29,16 +28,6 @@ const ChatBotWrapper = () => {
   if (isAdminRoute) return null;
   
   return <ChatBot />;
-};
-
-// Componente para mostrar la mascota excepto en rutas de admin
-const MascotWrapper = () => {
-  const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith('/admin');
-
-  if (isAdminRoute) return null;
-
-  return <Mascot />;
 };
 
 // Componente para redirigir si el usuario ya está logueado
@@ -176,7 +165,6 @@ function App() {
           />
           <AppRoutes />
           <ChatBotWrapper />
-          <MascotWrapper />
         </Router>
       </CartProvider>
     </AuthProvider>

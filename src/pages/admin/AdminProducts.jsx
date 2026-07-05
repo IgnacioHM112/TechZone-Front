@@ -171,44 +171,46 @@ const AdminProducts = () => {
 
   return (
     <Layout title="Gestión de Productos">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 md:gap-4 mb-6 md:mb-8">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-slate-100">Inventario Pro</h2>
-          <p className="text-slate-400 font-medium">Paginación y stock físico activados</p>
+          <h2 className="text-lg md:text-2xl font-bold tracking-tight text-slate-100">Inventario Pro</h2>
+          <p className="text-slate-400 text-xs md:text-sm font-medium">Paginación y stock físico activados</p>
         </div>
         <button
           onClick={() => handleOpenModal()}
-          className="btn-brand px-6 py-3 flex items-center gap-2"
+          className="btn-brand w-full md:w-auto px-5 md:px-6 py-2.5 md:py-3 flex items-center justify-center gap-2 text-xs md:text-sm"
         >
-          <Plus size={20} /> Nuevo Producto
+          <Plus size={18} /> Nuevo Producto
         </button>
       </div>
 
       {/* Filtros Admin */}
-      <div className="card-white p-6 mb-8 flex flex-col xl:flex-row gap-6">
-        <div className="flex-1 relative group">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" size={18} />
+      <div className="card-white p-3 md:p-6 mb-6 md:mb-8 flex flex-col xl:flex-row gap-3 md:gap-6">
+        <div className="flex-1 relative group w-full">
+          <Search className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" size={16} />
           <input 
             type="text"
-            className="input-brand pl-14 py-3.5 text-sm"
+            className="input-brand pl-8 md:pl-14 py-2.5 md:py-3.5 text-xs md:text-sm rounded-lg md:rounded-xl"
             value={filters.name}
             onChange={(e) => handleFilterChange({ name: e.target.value })}
+            placeholder="Buscar por nombre..."
           />
         </div>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap items-center gap-3 w-full xl:w-auto">
           <select 
-            className="bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-slate-950"
+            className="flex-1 sm:flex-initial bg-white border border-slate-200 rounded-lg md:rounded-xl px-2 md:px-3 py-2 text-xs md:text-sm outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-slate-950 cursor-pointer"
             value={filters.category_id}
             onChange={(e) => handleFilterChange({ category_id: e.target.value })}
           >
             <option value="">Todas las Categorías</option>
             {categories.map(cat => <option key={cat.id} value={cat.id}>{cat.name}</option>)}
           </select>
-          <div className="flex items-center gap-2">
-            <input type="number" placeholder="Min" className="w-20 bg-white border border-slate-200 rounded-xl px-2 py-2.5 text-sm text-slate-950 outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" value={filters.minPrice} onChange={(e) => handleFilterChange({ minPrice: e.target.value })} />
-            <input type="number" placeholder="Max" className="w-20 bg-white border border-slate-200 rounded-xl px-2 py-2.5 text-sm text-slate-950 outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" value={filters.maxPrice} onChange={(e) => handleFilterChange({ maxPrice: e.target.value })} />
+          <div className="flex items-center gap-1.5 w-full sm:w-auto justify-between sm:justify-start">
+            <input type="number" placeholder="Min" className="flex-1 sm:w-20 bg-white border border-slate-200 rounded-lg md:rounded-xl px-1.5 md:px-2 py-2 text-xs md:text-sm text-slate-950 outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" value={filters.minPrice} onChange={(e) => handleFilterChange({ minPrice: e.target.value })} />
+            <span className="text-slate-500 font-bold text-xs md:text-sm">-</span>
+            <input type="number" placeholder="Max" className="flex-1 sm:w-20 bg-white border border-slate-200 rounded-lg md:rounded-xl px-1.5 md:px-2 py-2 text-xs md:text-sm text-slate-950 outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" value={filters.maxPrice} onChange={(e) => handleFilterChange({ maxPrice: e.target.value })} />
           </div>
-          <select className="bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-slate-950" value={filters.sort} onChange={(e) => handleFilterChange({ sort: e.target.value })}>
+          <select className="flex-1 sm:flex-initial bg-white border border-slate-200 rounded-lg md:rounded-xl px-2 md:px-3 py-2 text-xs md:text-sm outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-slate-950 cursor-pointer" value={filters.sort} onChange={(e) => handleFilterChange({ sort: e.target.value })}>
             <option value="">Más Recientes</option>
             <option value="price_asc">Menor Precio</option>
             <option value="price_desc">Mayor Precio</option>
@@ -217,7 +219,7 @@ const AdminProducts = () => {
       </div>
 
       {loading ? (
-        <div className="flex flex-col items-center justify-center py-20 gap-4"><Loader2 className="w-10 h-10 text-blue-500 animate-spin" /><p className="text-slate-500 font-medium">Sincronizando catálogo...</p></div>
+        <div className="flex flex-col items-center justify-center py-20 gap-4"><Loader2 className="w-8 h-8 md:w-10 md:h-10 text-blue-500 animate-spin" /><p className="text-slate-500 font-medium text-xs md:text-sm">Sincronizando catálogo...</p></div>
       ) : products.length > 0 ? (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -230,12 +232,12 @@ const AdminProducts = () => {
                     <button onClick={() => setConfirmModal({ open: true, id: product.id })} className="p-2 bg-white/90 backdrop-blur-sm text-red-500 hover:bg-red-500 hover:text-white rounded-lg shadow-sm transition-all border border-slate-100"><Trash2 size={16} /></button>
                   </div>
                 </div>
-                <div className="p-5 flex-1 flex flex-col">
-                  <h3 className="font-bold text-lg text-slate-100 truncate mb-2">{product.name}</h3>
-                  <p className="text-slate-300 text-sm line-clamp-2 mb-4 h-10 leading-relaxed">{product.description}</p>
-                  <div className="mt-auto flex justify-between items-center pt-4 border-t border-slate-100 text-slate-100 font-bold">
-                    <span className="text-blue-300">${product.price.toLocaleString()}</span>
-                    <span className={`text-xs px-2 py-1 rounded-full ${product.stock > 0 ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}`}>Stock: {product.stock}</span>
+                <div className="p-4 md:p-5 flex-1 flex flex-col">
+                  <h3 className="font-bold text-sm md:text-lg text-slate-100 truncate mb-1 md:mb-2">{product.name}</h3>
+                  <p className="text-slate-300 text-xs md:text-sm line-clamp-2 mb-3 md:mb-4 h-8 md:h-10 leading-relaxed">{product.description}</p>
+                  <div className="mt-auto flex justify-between items-center pt-3 md:pt-4 border-t border-slate-100 text-slate-100 font-bold">
+                    <span className="text-blue-300 text-sm md:text-base">${product.price.toLocaleString()}</span>
+                    <span className={`text-[10px] md:text-xs px-1.5 md:px-2 py-0.5 md:py-1 rounded-full ${product.stock > 0 ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}`}>Stock: {product.stock}</span>
                   </div>
                 </div>
               </div>
@@ -244,19 +246,19 @@ const AdminProducts = () => {
 
           {/* Paginación Admin */}
           {meta.totalPages > 1 && (
-            <div className="mt-12 flex items-center justify-center gap-4">
-              <button disabled={filters.page === 1} onClick={() => setFilters({ ...filters, page: filters.page - 1 })} className="p-3 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 disabled:opacity-30 transition-all"><ChevronLeft size={20} /></button>
-              <div className="flex gap-2">
+            <div className="mt-12 flex items-center justify-center gap-2 sm:gap-4 w-full">
+              <button disabled={filters.page === 1} onClick={() => setFilters({ ...filters, page: filters.page - 1 })} className="p-2 sm:p-3 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"><ChevronLeft size={18} /></button>
+              <div className="flex gap-1.5 max-w-[180px] sm:max-w-none overflow-x-auto py-1 scrollbar-none">
                 {[...Array(meta.totalPages)].map((_, i) => (
-                  <button key={i + 1} onClick={() => setFilters({ ...filters, page: i + 1 })} className={`w-10 h-10 rounded-xl font-bold transition-all ${filters.page === i + 1 ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'bg-white text-slate-500 border border-slate-200 hover:bg-slate-50'}`}>{i + 1}</button>
+                  <button key={i + 1} onClick={() => setFilters({ ...filters, page: i + 1 })} className={`w-8 h-8 sm:w-10 sm:h-10 text-xs sm:text-sm rounded-xl font-bold flex-shrink-0 transition-all cursor-pointer ${filters.page === i + 1 ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'bg-white text-slate-500 border border-slate-200 hover:bg-slate-50'}`}>{i + 1}</button>
                 ))}
               </div>
-              <button disabled={filters.page === meta.totalPages} onClick={() => setFilters({ ...filters, page: filters.page + 1 })} className="p-3 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 disabled:opacity-30 transition-all"><ChevronRight size={20} /></button>
+              <button disabled={filters.page === meta.totalPages} onClick={() => setFilters({ ...filters, page: filters.page + 1 })} className="p-2 sm:p-3 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"><ChevronRight size={18} /></button>
             </div>
           )}
         </>
       ) : (
-        <div className="card-white border-dashed border-2 py-20 flex flex-col items-center justify-center text-center"><PackageX size={40} className="mb-4 text-slate-300" /><h3 className="text-xl font-bold text-slate-400">No se encontraron productos</h3><p className="text-slate-500 mt-2">Intenta ajustar los filtros de búsqueda</p></div>
+        <div className="card-white border-dashed border-2 py-16 md:py-20 flex flex-col items-center justify-center text-center"><PackageX size={32} className="mb-3 md:mb-4 text-slate-300" /><h3 className="text-lg md:text-xl font-bold text-slate-400">No se encontraron productos</h3><p className="text-slate-500 mt-1 md:mt-2 text-xs md:text-sm">Intenta ajustar los filtros de búsqueda</p></div>
       )}
 
       {/* Modales */}
@@ -264,16 +266,16 @@ const AdminProducts = () => {
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
           <div className="bg-white border border-slate-200 w-full max-w-2xl rounded-[2rem] shadow-2xl overflow-hidden my-auto animate-in zoom-in-95 duration-200">
             <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-              <h3 className="text-xl font-bold flex items-center gap-2 text-slate-800"><Package className="text-blue-600" /> {currentProduct ? 'Editar Producto' : 'Nuevo Producto'}</h3>
+              <h3 className="text-lg md:text-xl font-bold flex items-center gap-2 text-slate-800"><Package className="w-5 h-5 md:w-6 md:h-6 text-blue-600" /> {currentProduct ? 'Editar Producto' : 'Nuevo Producto'}</h3>
               <button onClick={() => setModalOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors p-2 hover:bg-slate-100 rounded-lg"><X size={24} /></button>
             </div>
             
-            <form onSubmit={handleSubmit} className="p-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <form onSubmit={handleSubmit} className="p-4 md:p-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                 {/* Zona de Imagen */}
-                <div className="space-y-4">
-                  <label className="block text-[11px] font-black uppercase tracking-wider text-slate-500 mb-2">Imagen del Producto</label>
-                  <div className="relative aspect-square bg-slate-50 border-2 border-dashed border-slate-200 rounded-3xl overflow-hidden flex flex-col items-center justify-center group hover:border-blue-500/50 transition-all cursor-pointer">
+                <div className="space-y-2 md:space-y-4">
+                  <label className="block text-[10px] md:text-[11px] font-black uppercase tracking-wider text-slate-500 mb-1 md:mb-2">Imagen del Producto</label>
+                  <div className="relative aspect-square bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl md:rounded-3xl overflow-hidden flex flex-col items-center justify-center group hover:border-blue-500/50 transition-all cursor-pointer">
                     {previewUrl ? (
                       <>
                         <img src={previewUrl} alt="Preview" className="w-full h-full object-cover transition-all group-hover:scale-105 group-hover:opacity-40" />
@@ -292,27 +294,27 @@ const AdminProducts = () => {
                   </div>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-3 md:space-y-4">
                   <div>
-                    <label className="block text-[11px] font-black uppercase tracking-wider text-slate-500 mb-2">Nombre</label>
-                    <input required type="text" className="input-brand py-2.5" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
+                    <label className="block text-[10px] md:text-[11px] font-black uppercase tracking-wider text-slate-500 mb-1 md:mb-2">Nombre</label>
+                    <input required type="text" className="input-brand py-1.5 md:py-2.5 text-xs md:text-sm rounded-lg md:rounded-xl" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div><label className="block text-[11px] font-black uppercase tracking-wider text-slate-500 mb-2">Precio</label><input required type="number" className="input-brand py-2.5" value={formData.price} onChange={(e) => setFormData({...formData, price: e.target.value})} /></div>
-                    <div><label className="block text-[11px] font-black uppercase tracking-wider text-slate-500 mb-2">Stock</label><input required type="number" className="input-brand py-2.5" value={formData.stock} onChange={(e) => setFormData({...formData, stock: e.target.value})} /></div>
+                  <div className="grid grid-cols-2 gap-3 md:gap-4">
+                    <div><label className="block text-[10px] md:text-[11px] font-black uppercase tracking-wider text-slate-500 mb-1 md:mb-2">Precio</label><input required type="number" className="input-brand py-1.5 md:py-2.5 text-xs md:text-sm rounded-lg md:rounded-xl" value={formData.price} onChange={(e) => setFormData({...formData, price: e.target.value})} /></div>
+                    <div><label className="block text-[10px] md:text-[11px] font-black uppercase tracking-wider text-slate-500 mb-1 md:mb-2">Stock</label><input required type="number" className="input-brand py-1.5 md:py-2.5 text-xs md:text-sm rounded-lg md:rounded-xl" value={formData.stock} onChange={(e) => setFormData({...formData, stock: e.target.value})} /></div>
                   </div>
                   <div>
-                    <label className="block text-[11px] font-black uppercase tracking-wider text-slate-500 mb-2">Categoría</label>
-                    <select className="input-brand py-2.5 appearance-none" value={formData.category_id} onChange={(e) => setFormData({...formData, category_id: e.target.value})}>
+                    <label className="block text-[10px] md:text-[11px] font-black uppercase tracking-wider text-slate-500 mb-1 md:mb-2">Categoría</label>
+                    <select className="input-brand py-1.5 md:py-2.5 text-xs md:text-sm rounded-lg md:rounded-xl appearance-none" value={formData.category_id} onChange={(e) => setFormData({...formData, category_id: e.target.value})}>
                       {categories.map(cat => <option key={cat.id} value={cat.id}>{cat.name}</option>)}
                     </select>
                   </div>
-                  <div><label className="block text-[11px] font-black uppercase tracking-wider text-slate-500 mb-2">Descripción</label><textarea rows="3" className="input-brand py-2.5 resize-none" value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} /></div>
+                  <div><label className="block text-[10px] md:text-[11px] font-black uppercase tracking-wider text-slate-500 mb-1 md:mb-2">Descripción</label><textarea rows="3" className="input-brand py-1.5 md:py-2.5 resize-none text-xs md:text-sm rounded-lg md:rounded-xl" value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} /></div>
                 </div>
               </div>
-              <div className="mt-8 flex gap-4">
-                <button type="button" onClick={() => setModalOpen(false)} className="flex-1 px-6 py-3 border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-50 font-semibold transition-all">Cancelar</button>
-                <button type="submit" className="flex-1 btn-brand px-6 py-3">{currentProduct ? 'Guardar Cambios' : 'Crear Producto'}</button>
+              <div className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <button type="button" onClick={() => setModalOpen(false)} className="w-full sm:flex-1 px-5 md:px-6 py-3 border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-50 font-semibold transition-all cursor-pointer text-sm">Cancelar</button>
+                <button type="submit" className="w-full sm:flex-1 btn-brand px-5 md:px-6 py-3 cursor-pointer text-sm">{currentProduct ? 'Guardar Cambios' : 'Crear Producto'}</button>
               </div>
             </form>
           </div>

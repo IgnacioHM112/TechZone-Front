@@ -33,7 +33,7 @@ body {
 }
 
 .input-brand {
-  @apply w-full bg-slate-950/80 border border-slate-700 rounded-xl pl-12 pr-4 py-3.5 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all;
+  @apply w-full bg-slate-950/80 border border-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all;
 }
 
 .input-with-icon {
@@ -84,8 +84,6 @@ input:focus::placeholder {
 }
 
 @media (max-width: 768px) {
-  .flex-row { @apply flex-col; }
-  aside { @apply w-full static mb-8; }
   nav.fixed .max-w-7xl { @apply px-4 h-16; }
   .pt-48 { @apply pt-32; }
   .text-6xl { @apply text-4xl; }
@@ -96,6 +94,7 @@ input:focus::placeholder {
   .grid-cols-4 { @apply grid-cols-1; }
   .p-12 { @apply p-6; }
   .px-6 { @apply px-4; }
+
 }
 
 @media (max-width: 480px) {

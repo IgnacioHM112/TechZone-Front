@@ -3,13 +3,14 @@ import { getProducts } from '../services/productService';
 import { getCategories } from '../services/categoryService';
 import { useCart } from '../context/CartContext';
 import SimpleNavbar from '../components/SimpleNavbar';
-import { Search, SlidersHorizontal, PackageX, Loader2, ShoppingCart, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, SlidersHorizontal, PackageX, Loader2, ShoppingCart, ChevronLeft, ChevronRight, ChevronDown, X, Filter } from 'lucide-react';
 
 const ProductsCatalog = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [meta, setMeta] = useState({ totalPages: 1, currentPage: 1 });
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
   const { addProduct } = useCart();
   
   const [filters, setFilters] = useState({
@@ -78,16 +79,16 @@ const ProductsCatalog = () => {
       <SimpleNavbar />
       
       <div className="max-w-7xl mx-auto px-6 mt-8 relative z-10">
-        <header className="mb-12 text-center md:text-left">
-          <h1 className="text-5xl font-black text-white mb-4 tracking-tight">Componentes de PC</h1>
-          <p className="text-slate-400 text-lg max-w-2xl font-medium">Seleccioná los mejores componentes para tu próxima configuración.</p>
+        <header className="mb-8 md:mb-12 text-center md:text-left">
+          <h1 className="text-3xl sm:text-5xl font-black text-white mb-4 tracking-tight">Componentes de PC</h1>
+          <p className="text-slate-400 text-sm sm:text-lg max-w-2xl font-medium">Seleccioná los mejores componentes para tu próxima configuración.</p>
         </header>
 
-        {/* Categorías Estilo Ejemplo-3 */}
-        <div className="flex flex-wrap gap-3 mb-8 justify-center md:justify-start">
+        {/* Categorías - Slider horizontal en mobile */}
+        <div className="flex gap-2 md:gap-3 mb-4 md:mb-8 overflow-x-auto pb-2 md:pb-3 -mx-4 md:-mx-6 px-4 md:px-6 scrollbar-none md:flex-wrap md:overflow-x-visible md:pb-0 md:mx-0 md:px-0 justify-start flex-nowrap md:flex-wrap">
           <button 
             onClick={() => handleFilterChange({ category_id: '' })}
-            className={`px-8 py-3 rounded-full text-sm font-black transition-all ${!filters.category_id ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'bg-white/5 backdrop-blur-sm border border-white/10 text-slate-400 hover:bg-white/10'}`}
+            className={`px-4 md:px-8 py-2 md:py-3 rounded-full text-[10px] md:text-sm font-black transition-all flex-shrink-0 cursor-pointer ${!filters.category_id ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'bg-white/5 backdrop-blur-sm border border-white/10 text-slate-400 hover:bg-white/10'}`}
           >
             Todos
           </button>
@@ -95,51 +96,73 @@ const ProductsCatalog = () => {
             <button 
               key={cat.id}
               onClick={() => handleFilterChange({ category_id: cat.id })}
-              className={`px-8 py-3 rounded-full text-sm font-black transition-all ${filters.category_id === cat.id ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'bg-white/5 backdrop-blur-sm border border-white/10 text-slate-400 hover:bg-white/10'}`}
+              className={`px-4 md:px-8 py-2 md:py-3 rounded-full text-[10px] md:text-sm font-black transition-all flex-shrink-0 cursor-pointer ${filters.category_id === cat.id ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'bg-white/5 backdrop-blur-sm border border-white/10 text-slate-400 hover:bg-white/10'}`}
             >
               {cat.name}
             </button>
           ))}
         </div>
 
-        {/* Filtros Horizontales Debajo de Categorías */}
-        <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-[2rem] mb-12 flex flex-col md:flex-row gap-6 items-center">
-          <div className="flex-1 w-full relative group">
-            <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-blue-400 transition-colors" size={20} />
+        {/* Barra de búsqueda siempre visible + botón filtros mobile */}
+        <div className="flex items-center gap-3 mb-4 md:mb-8">
+          <div className="flex-1 relative group">
+            <Search className="absolute left-4 md:left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-blue-400 transition-colors" size={18} />
             <input 
               type="text" placeholder="Buscar por nombre o modelo..."
-              className="w-full bg-white/5 border border-white/10 rounded-2xl py-3.5 pl-14 pr-6 outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-400 transition-all font-bold text-white placeholder-slate-500"
+              className="w-full bg-white/5 border border-white/10 rounded-xl md:rounded-2xl py-3 md:py-3.5 pl-12 md:pl-14 pr-4 md:pr-6 outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-400 transition-all font-bold text-white placeholder-slate-500 text-xs md:text-sm"
               value={filters.name}
               onChange={(e) => handleFilterChange({ name: e.target.value })}
             />
           </div>
-          
-          <div className="flex flex-wrap gap-4 w-full md:w-auto">
-            <select 
-              className="flex-1 md:w-48 bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm font-bold text-white outline-none focus:border-blue-400 transition-all cursor-pointer appearance-none"
-              value={filters.sort}
-              onChange={(e) => handleFilterChange({ sort: e.target.value })}
-            >
-              <option value="" style={{backgroundColor: '#1A222F'}}>Más Recientes</option>
-              <option value="price_asc" style={{backgroundColor: '#1A222F'}}>Menor Precio</option>
-              <option value="price_desc" style={{backgroundColor: '#1A222F'}}>Mayor Precio</option>
-            </select>
+          <button
+            onClick={() => setShowMobileFilters(!showMobileFilters)}
+            className="md:hidden flex items-center gap-2 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-all font-black text-xs uppercase tracking-widest"
+          >
+            <Filter size={16} />
+            Filtros
+            <ChevronDown size={14} className={`transition-transform ${showMobileFilters ? 'rotate-180' : ''}`} />
+          </button>
+        </div>
 
-            <div className="flex items-center gap-2">
-              <input 
-                type="number" placeholder="Min $"
-                className="w-24 bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm font-bold text-white placeholder-slate-500 outline-none focus:border-blue-400"
-                value={filters.minPrice}
-                onChange={(e) => handleFilterChange({ minPrice: e.target.value })}
-              />
-              <span className="text-slate-500 font-bold">-</span>
-              <input 
-                type="number" placeholder="Max $"
-                className="w-24 bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm font-bold text-white placeholder-slate-500 outline-none focus:border-blue-400"
-                value={filters.maxPrice}
-                onChange={(e) => handleFilterChange({ maxPrice: e.target.value })}
-              />
+        {/* Filtros avanzados: colapsable en mobile, siempre visible en desktop */}
+        <div className={`${showMobileFilters ? 'block' : 'hidden'} md:block bg-white/5 backdrop-blur-sm border border-white/10 p-3 md:p-6 rounded-2xl md:rounded-[2rem] mb-8 md:mb-12`}>
+          <div className="flex flex-col md:flex-row gap-3 md:gap-6 items-start md:items-center">
+            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto md:flex-1">
+              <select 
+                className="w-full sm:flex-1 md:w-48 bg-[#1A222F] border border-white/10 rounded-xl md:rounded-2xl px-4 md:px-5 py-3 md:py-3.5 text-xs md:text-sm font-bold text-white outline-none focus:border-blue-400 transition-all cursor-pointer"
+                value={filters.sort}
+                onChange={(e) => handleFilterChange({ sort: e.target.value })}
+              >
+                <option value="" style={{backgroundColor: '#1A222F'}}>Más Recientes</option>
+                <option value="price_asc" style={{backgroundColor: '#1A222F'}}>Menor Precio</option>
+                <option value="price_desc" style={{backgroundColor: '#1A222F'}}>Mayor Precio</option>
+              </select>
+
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                <input 
+                  type="number" placeholder="Min $"
+                  className="flex-1 sm:w-24 bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-3 md:px-4 py-3 md:py-3.5 text-xs md:text-sm font-bold text-white placeholder-slate-500 outline-none focus:border-blue-400"
+                  value={filters.minPrice}
+                  onChange={(e) => handleFilterChange({ minPrice: e.target.value })}
+                />
+                <span className="text-slate-500 font-bold text-xs md:text-sm">-</span>
+                <input 
+                  type="number" placeholder="Max $"
+                  className="flex-1 sm:w-24 bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-3 md:px-4 py-3 md:py-3.5 text-xs md:text-sm font-bold text-white placeholder-slate-500 outline-none focus:border-blue-400"
+                  value={filters.maxPrice}
+                  onChange={(e) => handleFilterChange({ maxPrice: e.target.value })}
+                />
+              </div>
             </div>
+
+            {/* Botón cerrar en mobile */}
+            <button
+              onClick={() => setShowMobileFilters(false)}
+              className="md:hidden w-full flex items-center justify-center gap-2 px-4 py-3 bg-blue-600/10 text-blue-400 border border-blue-500/20 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all"
+            >
+              <X size={14} />
+              Aplicar Filtros
+            </button>
           </div>
         </div>
 
@@ -200,21 +223,21 @@ const ProductsCatalog = () => {
 
               {/* Controles de Paginación */}
               {meta.totalPages > 1 && (
-                <div className="mt-20 flex items-center justify-center gap-6">
+                <div className="mt-16 sm:mt-20 flex items-center justify-center gap-2 sm:gap-6 w-full">
                   <button 
                     disabled={filters.page === 1}
                     onClick={() => setFilters({ ...filters, page: filters.page - 1 })}
-                    className="w-14 h-14 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 text-slate-400 hover:bg-white/10 hover:text-blue-400 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center"
+                    className="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 text-slate-400 hover:bg-white/10 hover:text-blue-400 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center cursor-pointer"
                   >
-                    <ChevronLeft size={24} />
+                    <ChevronLeft size={20} />
                   </button>
                   
-                  <div className="flex gap-3">
+                  <div className="flex gap-1.5 sm:gap-3 max-w-[180px] sm:max-w-none overflow-x-auto py-1 scrollbar-none">
                     {[...Array(meta.totalPages)].map((_, i) => (
                       <button
                         key={i + 1}
                         onClick={() => setFilters({ ...filters, page: i + 1 })}
-                        className={`w-14 h-14 rounded-2xl font-black text-lg transition-all ${
+                        className={`w-10 h-10 sm:w-14 sm:h-14 rounded-2xl font-black text-sm sm:text-lg transition-all flex-shrink-0 flex items-center justify-center cursor-pointer ${
                           filters.page === i + 1 
                           ? 'bg-blue-600 text-white shadow-xl shadow-blue-600/20' 
                           : 'bg-white/5 backdrop-blur-sm text-slate-400 border border-white/10 hover:bg-white/10 hover:text-slate-200'
@@ -228,9 +251,9 @@ const ProductsCatalog = () => {
                   <button 
                     disabled={filters.page === meta.totalPages}
                     onClick={() => setFilters({ ...filters, page: filters.page + 1 })}
-                    className="w-14 h-14 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 text-slate-400 hover:bg-white/10 hover:text-blue-400 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center"
+                    className="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 text-slate-400 hover:bg-white/10 hover:text-blue-400 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center cursor-pointer"
                   >
-                    <ChevronRight size={24} />
+                    <ChevronRight size={20} />
                   </button>
                 </div>
               )}

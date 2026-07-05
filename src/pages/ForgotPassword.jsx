@@ -88,7 +88,7 @@ const ForgotPassword = () => {
                   type="email"
                   required
                   placeholder="ejemplo@correo.com"
-                  className="input-brand"
+                  className="input-brand py-3.5 rounded-xl pl-12 pr-4 text-sm"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={loading}

@@ -77,26 +77,26 @@ const ChatBot = () => {
       {/* Botón flotante */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full shadow-2xl shadow-blue-500/40 hover:shadow-blue-500/60 transition-all duration-300 flex items-center justify-center hover:scale-110 active:scale-95 group"
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full shadow-2xl shadow-blue-500/40 hover:shadow-blue-500/60 transition-all duration-300 flex items-center justify-center hover:scale-110 active:scale-95 group"
         aria-label={isOpen ? 'Cerrar chat' : 'Abrir chat'}
       >
         {isOpen ? (
-          <X className="w-8 h-8 text-white transition-transform duration-300 group-hover:rotate-90" />
+          <X className="w-6 h-6 md:w-8 md:h-8 text-white transition-transform duration-300 group-hover:rotate-90" />
         ) : (
-          <MessageCircle className="w-8 h-8 text-white transition-all group-hover:scale-110" />
+          <MessageCircle className="w-6 h-6 md:w-8 md:h-8 text-white transition-all group-hover:scale-110" />
         )}
       </button>
 
       {/* Ventana de chat */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-40 w-[calc(100%-3rem)] max-w-[400px] h-[600px] bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden flex flex-col animate-in slide-in-from-bottom-4 fade-in duration-300">
+        <div className="fixed bottom-24 right-3 md:right-6 z-40 w-[calc(100%-1.5rem)] md:w-[calc(100%-3rem)] max-w-[400px] h-[70vh] max-h-[600px] min-h-[400px] bg-white border border-slate-200 rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col animate-in slide-in-from-bottom-4 fade-in duration-300">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-emerald-500 p-5 flex items-center gap-4 shadow-lg shadow-blue-600/10">
-            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-inner">
-              <Bot className="w-7 h-7 text-white" />
+          <div className="bg-gradient-to-r from-blue-600 to-emerald-500 p-3 md:p-5 flex items-center gap-3 md:gap-4 shadow-lg shadow-blue-600/10">
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 backdrop-blur-sm rounded-xl md:rounded-2xl flex items-center justify-center shadow-inner">
+              <Bot className="w-5 h-5 md:w-7 md:h-7 text-white" />
             </div>
             <div>
-              <h3 className="text-white font-bold text-base tracking-tight">Asistente TechZone</h3>
+              <h3 className="text-white font-bold text-sm md:text-base tracking-tight">Asistente TechZone</h3>
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 bg-emerald-300 rounded-full animate-pulse"></span>
                 <p className="text-blue-50 text-xs font-medium">En línea ahora</p>
@@ -104,14 +104,14 @@ const ChatBot = () => {
             </div>
             <button 
               onClick={() => setIsOpen(false)}
-              className="ml-auto p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors md:hidden"
+              className="ml-auto p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
             >
               <X size={20} />
             </button>
           </div>
 
           {/* Mensajes */}
-          <div className="flex-1 overflow-y-auto p-5 space-y-5 bg-slate-50/50 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
+          <div className="flex-1 overflow-y-auto p-3 md:p-5 space-y-3 md:space-y-5 bg-slate-50/50 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
             {messages.map((message) => (
               <div
                 key={message.id}
@@ -150,22 +150,22 @@ const ChatBot = () => {
           </div>
 
           {/* Input */}
-          <form onSubmit={handleSendMessage} className="p-5 border-t border-slate-100 bg-white">
-            <div className="flex items-center gap-3 bg-slate-50 rounded-2xl border border-slate-200 focus-within:border-blue-500/50 focus-within:ring-4 focus-within:ring-blue-500/10 transition-all px-2">
+          <form onSubmit={handleSendMessage} className="p-3 md:p-5 border-t border-slate-100 bg-white">
+            <div className="flex items-center gap-2 md:gap-3 bg-slate-50 rounded-xl md:rounded-2xl border border-slate-200 focus-within:border-blue-500/50 focus-within:ring-4 focus-within:ring-blue-500/10 transition-all px-1 md:px-2">
               <input
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Escribe tu consulta aquí..."
-                className="flex-1 bg-transparent text-slate-900 text-sm px-4 py-4 placeholder-slate-400 focus:outline-none"
+                className="flex-1 bg-transparent text-slate-900 text-xs md:text-sm px-3 md:px-4 py-3 md:py-4 placeholder-slate-400 focus:outline-none"
                 disabled={isLoading}
               />
               <button
                 type="submit"
                 disabled={!inputValue.trim() || isLoading}
-                className="p-3 bg-blue-600 text-white rounded-xl disabled:opacity-30 disabled:cursor-not-allowed hover:bg-blue-700 active:scale-90 transition-all"
+                className="p-2.5 md:p-3 bg-blue-600 text-white rounded-lg md:rounded-xl disabled:opacity-30 disabled:cursor-not-allowed hover:bg-blue-700 active:scale-90 transition-all"
               >
-                <Send className="w-5 h-5" />
+                <Send className="w-4 h-4 md:w-5 md:h-5" />
               </button>
             </div>
           </form>

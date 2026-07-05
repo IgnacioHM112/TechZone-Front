@@ -1,24 +1,27 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Zap, ChevronRight, Mail, ShieldCheck, Truck, Headphones } from 'lucide-react';
+import { Zap, ChevronRight, Mail, ShieldCheck, Truck, Headphones, Menu, X, LayoutDashboard } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const LandingPage = () => {
   const { user, isAdmin } = useAuth();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-slate-950 text-white selection:bg-blue-100">
       {/* Navbar Minimalista */}
       <nav className="fixed top-0 w-full z-50 bg-slate-950 shadow-sm border-b border-slate-800 transition-all">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 group transition-all">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2 md:gap-3 group transition-all">
             <div className="w-9 h-9 bg-gradient-to-br from-blue-600 to-emerald-500 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform">
               <span className="font-bold text-lg text-white">T</span>
             </div>
             <span className="text-xl font-black tracking-tight text-white">TechZone</span>
           </Link>
           
-          <div className="flex items-center gap-8">
-            <div className="hidden md:flex gap-4 text-xs font-black uppercase tracking-widest">
+          {/* Desktop */}
+          <div className="hidden md:flex items-center gap-8">
+            <div className="flex gap-4 text-xs font-black uppercase tracking-widest">
               <a href="#contact" className="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-blue-300 hover:text-blue-200 hover:bg-blue-500/10 transition-colors">Contacto</a>
             </div>
             {user ? (
@@ -45,7 +48,60 @@ const LandingPage = () => {
               </div>
             )}
           </div>
+
+          {/* Mobile: Hamburguesa */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-slate-100 hover:text-blue-400 transition-colors"
+            aria-label="Abrir menú"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-slate-900 border-b border-slate-800 shadow-2xl animate-in slide-in-from-top-2 fade-in duration-200">
+            <div className="px-4 py-6 space-y-1">
+              <a
+                href="#contact"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm font-bold text-slate-300 hover:bg-slate-800 transition-colors"
+              >
+                <Mail size={20} />
+                Contacto
+              </a>
+              {user ? (
+                <Link
+                  to={isAdmin ? '/admin/products' : '/home'}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl text-sm font-bold text-slate-100 bg-blue-600 hover:bg-blue-700 transition-colors mt-3"
+                >
+                  <LayoutDashboard size={18} />
+                  Dashboard
+                </Link>
+              ) : (
+                <>
+                  <div className="h-px bg-slate-800 my-3"></div>
+                  <Link
+                    to="/login"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-center px-4 py-3.5 rounded-xl text-sm font-bold text-slate-100 bg-blue-600 hover:bg-blue-700 transition-colors"
+                  >
+                    INGRESAR
+                  </Link>
+                  <Link
+                    to="/register"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-center px-4 py-3.5 rounded-xl text-sm font-bold text-blue-400 border border-blue-500/20 hover:bg-blue-600/10 transition-colors mt-2"
+                  >
+                    REGISTRARSE
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section - Fondo más oscuro integrado */}
