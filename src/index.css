@@ -79,7 +79,7 @@ input:focus::placeholder {
 
 @media (max-width: 1024px) {
   .max-w-7xl { @apply px-4; }
-  h1 { @apply text-4xl leading-tight; }
+
   .grid { @apply gap-4; }
 }
 

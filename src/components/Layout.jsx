@@ -13,16 +13,16 @@ const Layout = ({ children, title = 'Panel de Control' }) => {
 
       <main className="flex-1 flex flex-col relative w-full">
         {/* Header */}
-        <header className="h-16 md:h-20 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-3 md:px-8 flex items-center justify-between sticky top-0 z-10">
-          <div className="flex items-center gap-3 md:gap-4">
+        <header className="min-h-16 md:min-h-20 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-3 md:px-8 py-3 md:py-5 flex items-center justify-between sticky top-0 z-10">
+          <div className="flex items-center gap-3 md:gap-4 min-w-0 flex-1">
             <button
               onClick={() => setIsSidebarOpen(true)}
-              className="p-1.5 md:p-2 text-slate-400 hover:text-white md:hidden hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
+              className="p-1.5 md:p-2 text-slate-400 hover:text-white md:hidden hover:bg-slate-800 rounded-lg transition-colors cursor-pointer flex-shrink-0"
               aria-label="Abrir menú"
             >
               <Menu size={22} />
             </button>
-            <h1 className="text-xs md:text-lg font-bold text-slate-100 tracking-tight">{title}</h1>
+            <h1 className="text-xs md:text-lg font-bold text-slate-100 tracking-tight break-words">{title}</h1>
           </div>
           <div className="flex items-center gap-4 md:gap-6">
             <div className="flex items-center gap-2 md:gap-3">
