@@ -10,6 +10,8 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [updatingId, setUpdatingId] = useState(null);
+  const [totalUSD, setTotalUSD] = useState(0);
+  const [cryptoOptions, setCryptoOptions] = useState([]);
 
   useEffect(() => {
     if (token && user) {
@@ -32,6 +34,36 @@ export const CartProvider = ({ children }) => {
         items = res.data.CartItems;
       }
       setCartItems(items);
+
+      const itemsArray = Array.isArray(items) ? items : [];
+      const computedTotal = itemsArray.reduce((acc, item) => {
+        const price = item.product?.price || 0;
+        return acc + (item.quantity * price);
+      }, 0);
+
+      const payload = res.data?.data || (!Array.isArray(res.data) ? res.data : null);
+
+      let usdValue = payload?.totalUSD ?? 0;
+      let crypto = Array.isArray(payload?.cryptoOptions) ? payload.cryptoOptions : [];
+
+      if (usdValue === 0 || usdValue === computedTotal) {
+        const USD_RATE = 1400;
+        usdValue = computedTotal / USD_RATE;
+      }
+
+      if (crypto.length === 0 && usdValue > 0) {
+        const BTC_RATE = 67500.42;
+        crypto = [{
+          currency: 'BTC',
+          symbol: '\u20BF',
+          rate: BTC_RATE,
+          total: usdValue / BTC_RATE,
+          label: 'Bitcoin'
+        }];
+      }
+
+      setTotalUSD(usdValue);
+      setCryptoOptions(crypto);
     } catch (err) {
       console.error('Error al cargar carrito:', err);
     } finally {
@@ -133,6 +165,8 @@ export const CartProvider = ({ children }) => {
       emptyCart, 
       totalItems, 
       totalPrice,
+      totalUSD,
+      cryptoOptions,
       refreshCart: fetchCart
     }}>
       {children}

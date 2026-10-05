@@ -8,7 +8,7 @@ import { createPreference } from '../services/orderService';
 import toast from 'react-hot-toast';
 
 const CartPage = () => {
-  const { cartItems, loading, updatingId, deleteItem, emptyCart, addProduct, removeUnits, totalPrice, totalItems } = useCart();
+  const { cartItems, loading, updatingId, deleteItem, emptyCart, addProduct, removeUnits, totalPrice, totalItems, totalUSD, cryptoOptions } = useCart();
   const [confirmModal, setConfirmModal] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
 
@@ -150,25 +150,50 @@ const CartPage = () => {
                   Resumen
                 </h2>
                 
-                <div className="space-y-4 md:space-y-5 mb-8 md:mb-10 relative z-10">
-                  <div className="flex justify-between items-center text-slate-500 font-medium">
-                    <span className="text-sm">Items seleccionados</span>
-                    <span className="font-bold text-white">{totalItems}</span>
+                <div className="space-y-4 relative z-10">
+                  <div className="bg-slate-950/50 rounded-2xl p-4 sm:p-5 space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-slate-400 font-medium">Items seleccionados</span>
+                      <span className="font-extrabold text-white">{totalItems}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-slate-400 font-medium">Envío Express</span>
+                      <span className="bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg border border-emerald-500/20">Bonificado</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between items-center text-slate-500 font-medium">
-                    <span className="text-sm">Envío Express</span>
-                    <span className="bg-emerald-50 text-emerald-600 text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg border border-emerald-100">Bonificado</span>
-                  </div>
-                  <div className="pt-6 md:pt-8 border-t border-slate-50 flex flex-col gap-1.5">
-                    <span className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">Total a pagar</span>
-                    <span className="text-3xl sm:text-5xl font-black text-white">${totalPrice.toLocaleString()}</span>
+
+                  <div className="space-y-2">
+                    <div className="bg-blue-500/5 rounded-xl px-4 py-3 border border-blue-500/10 flex items-center justify-between">
+                      <span className="text-[10px] text-blue-400/70 font-black uppercase tracking-[0.2em]">Pesos Argentinos</span>
+                      <span className="text-base sm:text-lg font-black text-white">${totalPrice.toLocaleString()}</span>
+                    </div>
+
+                    {totalUSD > 0 && (
+                      <div className="bg-emerald-500/5 rounded-xl px-4 py-3 border border-emerald-500/10 flex items-center justify-between">
+                        <span className="text-[10px] text-emerald-400/70 font-black uppercase tracking-[0.2em]">Dólares USD</span>
+                        <span className="text-sm sm:text-base font-black text-emerald-300">${totalUSD.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                      </div>
+                    )}
+
+                    {cryptoOptions.length > 0 && (
+                      <div className="bg-yellow-500/5 rounded-xl px-4 py-3 border border-yellow-500/10">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] text-yellow-400/70 font-black uppercase tracking-[0.2em]">{cryptoOptions[0].label}</span>
+                          <span className="text-sm sm:text-base font-black text-yellow-300">{cryptoOptions[0].symbol} {cryptoOptions[0].total.toFixed(8)}</span>
+                        </div>
+                        <div className="flex items-center justify-between mt-1">
+                          <span className="text-[10px] text-slate-600">Tasa</span>
+                          <span className="text-[10px] text-slate-500">{cryptoOptions[0].symbol} 1 = ${cryptoOptions[0].rate?.toLocaleString()}</span>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
                 <button 
                   disabled={isCheckingOut}
                   onClick={handleCheckout}
-                  className="w-full btn-brand py-4 md:py-5 text-base md:text-lg flex items-center justify-center gap-3 relative z-10 disabled:opacity-50 cursor-pointer"
+                  className="w-full btn-brand py-4 md:py-5 text-base md:text-lg flex items-center justify-center gap-3 relative z-10 disabled:opacity-50 cursor-pointer mt-6"
                 >
                   {isCheckingOut ? <Loader2 className="animate-spin" /> : (
                     <>
@@ -177,10 +202,15 @@ const CartPage = () => {
                     </>
                   )}
                 </button>
-                
-                <div className="mt-10 flex items-center justify-center gap-6 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-4" />
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-7" />
+
+                <div className="mt-6 pt-6 border-t border-slate-800 relative z-10">
+                  <span className="text-[10px] text-slate-500 font-black uppercase tracking-[0.2em] block mb-4">Medios de pago</span>
+                  <div className="flex items-center justify-center gap-4 flex-wrap">
+                    <img src="/payments/mercadopago.svg.png" alt="Mercado Pago" className="h-7 opacity-60 hover:opacity-100 transition-opacity" />
+                    <img src="/payments/visa.svg.png" alt="Visa" className="h-5 opacity-60 hover:opacity-100 transition-opacity" />
+                    <img src="/payments/mastercard.svg.png" alt="Mastercard" className="h-7 opacity-60 hover:opacity-100 transition-opacity" />
+                    <img src="/payments/bitcoin.svg.png" alt="Bitcoin" className="h-6 opacity-60 hover:opacity-100 transition-opacity" />
+                  </div>
                 </div>
               </div>
               

@@ -22,7 +22,7 @@ const Home = () => {
     try {
       setLoading(true);
       const res = await getUserOrders();
-      setOrders(res.data || []);
+      setOrders(res.data?.data || []);
     } catch (error) {
       console.error('Error fetching orders:', error);
       toast.error('No se pudieron cargar tus pedidos');
