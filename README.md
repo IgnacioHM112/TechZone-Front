@@ -74,7 +74,8 @@ npm install
 ### 3. Configurar variables de entorno
 Crea un archivo `.env` en la raíz (puedes usar `.env.example` como base):
 ```env
-VITE_API_URL=http://tu-backend-api.com/api
+VITE_API_URL=https://TU_NGROK_URL.ngrok-free.dev/api
+NGROK_HOST=TU_NGROK_URL.ngrok-free.dev  # Para HMR WebSocket via ngrok
 ```
 
 ### 4. Iniciar servidor de desarrollo
