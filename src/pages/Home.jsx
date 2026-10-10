@@ -22,7 +22,8 @@ const Home = () => {
     try {
       setLoading(true);
       const res = await getUserOrders();
-      setOrders(res.data?.data || []);
+      // API devuelve array directo, no {data: {data: []}}
+      setOrders(res.data || []);
     } catch (error) {
       console.error('Error fetching orders:', error);
       toast.error('No se pudieron cargar tus pedidos');
