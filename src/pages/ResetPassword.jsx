@@ -44,7 +44,7 @@ const ResetPassword = () => {
       });
       setSuccess(true);
     } catch (err) {
-      setError(err.response?.data?.message || 'El enlace de recuperación es inválido o ha expirado.');
+      setError(err.response?.data?.mensaje || err.response?.data?.message || 'El enlace de recuperación es inválido o ha expirado.');
     } finally {
       setLoading(false);
     }

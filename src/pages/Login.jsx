@@ -32,7 +32,7 @@ const Login = () => {
         navigate('/products');
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Error al iniciar sesión. Verifica tus credenciales.');
+      setError(err.response?.data?.mensaje || err.response?.data?.message || 'Error al iniciar sesión. Verifica tus credenciales.');
     } finally {
       setLoading(false);
     }

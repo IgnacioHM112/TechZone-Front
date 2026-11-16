@@ -25,7 +25,7 @@ const ForgotPassword = () => {
         setDevInfo(response.data.dev_info);
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Ocurrió un error al procesar tu solicitud. Inténtalo de nuevo.');
+      setError(err.response?.data?.mensaje || err.response?.data?.message || 'Ocurrió un error al procesar tu solicitud. Inténtalo de nuevo.');
     } finally {
       setLoading(false);
     }
